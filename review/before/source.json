@@ -1,0 +1,13 @@
+{
+  "sourceCommit": "2d14088a249b862762c4456381011fc7efaf1c92",
+  "sourceFilesMatch": {
+    "app.js": true,
+    "index.html": true,
+    "style.css": true,
+    "camera-views.js": true,
+    "slot-state.js": true,
+    "slot-timeline.js": true
+  },
+  "dependencyNote": "Same official three@0.165.0 module bundled for normal local loading; no TLS/trust override.",
+  "captures": "Actual Chromium WebGL, 360x800 and 390x844, DPR2, play pose paused."
+}

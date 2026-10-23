@@ -1,0 +1,12 @@
+{
+  "version": "0.165.0",
+  "package": "https://registry.npmjs.org/three/-/three-0.165.0.tgz",
+  "sha256": {
+    "three.module.js": "5916c8dfb5f4e3eede312de305345868d4a0a8105383b080c6985565d6e79b46",
+    "LICENSE": "4c40a1ef62450b857c3b2aaf294936304cd552d965fbcd9d32d4c5bcf4ba4454",
+    "addons/loaders/GLTFLoader.js": "32e8ea1535e3016302dec82371beccd60e9cd371ee09fd8daee2ac45e8148a56",
+    "addons/utils/BufferGeometryUtils.js": "c25b7930e570e9ec56173cd3b866ec8d2e10016630db3937efb439daf1cedbf6",
+    "addons/geometries/RoundedBoxGeometry.js": "d20aeaf7077c459a8d952d215738d7b44fba028440bb862d84b622a34f0c80bb",
+    "addons/environments/RoomEnvironment.js": "e1b92c4dd2d89752293546790bfda9828a630a79700c66f5b736fad7a88cb7e4"
+  }
+}

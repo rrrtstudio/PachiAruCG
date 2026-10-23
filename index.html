@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#111827">
   <meta name="description" content="スマホで確認できる架空パチスロCGキャラクターの3Dアニメーション試作">
-  <title>PachiAruCG | Motion Lab</title>
+  <title>PachiAruCG | 造形レビュー</title>
   <link rel="stylesheet" href="./style.css">
   <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js"
+      "three": "./vendor/three/three.module.js",
+      "three/addons/": "./vendor/three/addons/"
     }
   }
   </script>
@@ -18,34 +19,35 @@
 <body>
 <main class="app">
   <header class="header">
-    <div class="eyebrow">PachiAruCG / PROTOTYPE 01</div>
-    <h1>3Dキャラクター動作テスト</h1>
-    <p>髪なし・肌色・目と口だけのCG人間。スマホのブラウザで滑らかな動きを確認します。</p>
+    <div class="eyebrow">PachiAruCG / VISUAL STUDY 02</div>
+    <h1>顔と手元の造形レビュー</h1>
+    <p>同じ人物とスマスロを3つの構図から確認。手元の接触と座った姿勢を中心に見直しました。</p>
   </header>
   <div class="workspace">
     <section class="preview-section" aria-label="縦動画プレビュー">
       <div class="preview-top"><strong>縦動画プレビュー</strong><span>9:16</span></div>
       <div class="stage" id="stage">
         <div class="loading" id="loading">3Dを読み込み中…</div>
-        <div class="corner top"></div><div class="corner bottom"></div>
       </div>
-      <p class="preview-note">説明用の文字や実在機種のロゴは映像に入れていません。左右の台は縦画面から一部見切れる構図です。</p>
+      <p class="preview-note">Aは台と操作部、Bは肩越し、Cは顔と手元を確認する構図です。</p>
+      <a class="review-link" href="./review/index.html">Cの改善前後と3視点の画像を比較する →</a>
     </section>
     <section class="panel" aria-label="キャラクター操作">
       <section class="camera-setting" aria-label="カメラ切り替え">
         <h2>カメラ</h2>
         <div class="camera-controls" role="group" aria-label="撮影する視点">
-          <button type="button" data-camera="player" aria-pressed="false">打ち手視点</button>
-          <button type="button" data-camera="behind" aria-pressed="false">背後視点</button>
-          <button type="button" data-camera="side" aria-pressed="true">横からの視点</button>
+          <button type="button" data-camera="player" aria-pressed="false">A：台と操作部</button>
+          <button type="button" data-camera="behind" aria-pressed="false">B：肩越し</button>
+          <button type="button" data-camera="side" aria-pressed="true">C：顔と手元</button>
         </div>
         <p class="camera-status">表示中：<span id="camera-status" aria-live="polite">横からの視点</span></p>
+        <button class="study-button" type="button" id="study">静止ポーズに戻す</button>
       </section>
       <div class="line"></div>
       <div class="eyebrow">MOTION CONTROLLER</div>
       <h2>動きを選ぶ</h2>
       <div id="actions" class="controls" role="group" aria-label="個別の動作">
-        <button type="button" data-action="idle">無表情</button>
+        <button type="button" data-action="idle">無表情・まばたき</button>
         <button type="button" data-action="play">遊技する</button>
         <button type="button" data-action="look">隣を見る</button>
         <button type="button" data-action="shock">驚く</button>
@@ -86,7 +88,7 @@
       </section>
     </section>
   </div>
-  <footer>Prototype 01 — まずは人物の動きを固定し、次に店舗内設備・駐車場・店外背景へ展開します。</footer>
+  <footer>Visual Study 02 — 顔・手元・椅子・台を、全視点で同じ立体モデルから描画します。</footer>
 </main>
 <script type="module" src="./app.js"></script>
 </body>

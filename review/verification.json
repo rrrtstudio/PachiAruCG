@@ -1,0 +1,2135 @@
+{
+  "phase": "all",
+  "source": "real Chromium WebGL rendering",
+  "tls": "normal verification; no certificate or trust override",
+  "static": [
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "pixelRatio": 2.0,
+      "captures": [
+        {
+          "view": "player",
+          "label": "A：打ち手操作視点",
+          "file": "images/360-player.png",
+          "sha256": "0b5e9e689d214759d2cf89bbf377ebf2f32f41e071866472b98ac4ed048edde5",
+          "pixels": [
+            652,
+            1164
+          ],
+          "sampledColors": 10434,
+          "layout": {
+            "stageWidth": 328,
+            "stageHeight": 583.109375,
+            "pageWidth": 360,
+            "viewport": 360,
+            "canvasWidth": 652,
+            "canvasHeight": 1162
+          },
+          "modelId": "a5b8e413-0d38-44f2-8bee-cd6703eadd7e",
+          "cabinetIds": [
+            "4b94af18-c155-43b8-9d3d-44e9ea17241c",
+            "08bd9126-f779-4cb4-a611-6412f4f7c869",
+            "1878f1da-4f4a-4bfe-8f1c-8e15521785be"
+          ],
+          "cabinets": [
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "blue",
+                  "green",
+                  "orange"
+                ],
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "purple",
+                  "rose",
+                  "blue"
+                ],
+                [
+                  "green",
+                  "orange",
+                  "yellow"
+                ],
+                [
+                  "lavender",
+                  "purple",
+                  "rose"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ],
+                [
+                  "orange",
+                  "yellow",
+                  "lavender"
+                ]
+              ],
+              "noticeLampOn": false
+            }
+          ],
+          "pose": {
+            "headYaw": 0.55,
+            "headPitch": 0,
+            "spinePitch": 0,
+            "chestRoll": 0,
+            "rightX": 0.184,
+            "rightY": 0.8230000000000001,
+            "rightZ": 0.307,
+            "leftX": -0.263,
+            "leftY": 0.8410000000000001,
+            "leftZ": 0.327,
+            "smile": 0,
+            "open": 0,
+            "frown": 0,
+            "blink": 0,
+            "press": 0,
+            "button": 2
+          },
+          "contacts": {
+            "space": "metres/world",
+            "rightButtonPad": [
+              0.15999999750164837,
+              0.7939999930818817,
+              0.199000004242592
+            ],
+            "leftButtonPad": [
+              -0.2390000018792239,
+              0.8120000011574624,
+              0.2190000008198773
+            ],
+            "leftLeverGrip": [
+              -0.2780000021695529,
+              0.7880000014956291,
+              0.22700000096068107
+            ],
+            "studySurfaceGaps": {
+              "rightStop": 8.491272495770133e-09,
+              "leftLever": 2.8047770076634034e-09
+            },
+            "arms": {
+              "R": {
+                "requestedDistance": 0.4266954005948794,
+                "solvedDistance": 0.4266954005948794,
+                "maxReach": 0.4985470504793882,
+                "clamped": false,
+                "requestedWrist": [
+                  0.184,
+                  0.8230000000000001,
+                  0.307
+                ],
+                "wrist": [
+                  0.1840000002929754,
+                  0.8229999987485819,
+                  0.3070000013350836
+                ],
+                "elbow": [
+                  0.28039041106005763,
+                  0.8146694928693242,
+                  0.4415900927694051
+                ],
+                "wristError": 1.8531946168423375e-09,
+                "elbowBendDegrees": 66.58360932762146
+              },
+              "L": {
+                "requestedDistance": 0.4115263878684529,
+                "solvedDistance": 0.4115263878684529,
+                "maxReach": 0.4290979802536183,
+                "clamped": false,
+                "requestedWrist": [
+                  -0.263,
+                  0.8410000000000001,
+                  0.327
+                ],
+                "wrist": [
+                  -0.2630000010470311,
+                  0.8410000016319704,
+                  0.32700000162403925
+                ],
+                "elbow": [
+                  -0.25419672372156743,
+                  0.8290664085637324,
+                  0.4221582242574201
+                ],
+                "wristError": 2.529249827295249e-09,
+                "elbowBendDegrees": 39.685442173055684
+              }
+            }
+          },
+          "contactChecks": {
+            "status": "passed",
+            "toleranceMetres": 0.001,
+            "maxStudySurfaceGapMetres": 8.491272495770133e-09,
+            "maxWristErrorMetres": 2.529249827295249e-09,
+            "clamped": false
+          }
+        },
+        {
+          "view": "behind",
+          "label": "B：背後からの肩越し",
+          "file": "images/360-behind.png",
+          "sha256": "287f64579cdfaf16678a861a140518fa23b8f0671cf52be6b84025e676ac7927",
+          "pixels": [
+            652,
+            1164
+          ],
+          "sampledColors": 10551,
+          "layout": {
+            "stageWidth": 328,
+            "stageHeight": 583.109375,
+            "pageWidth": 360,
+            "viewport": 360,
+            "canvasWidth": 652,
+            "canvasHeight": 1162
+          },
+          "modelId": "a5b8e413-0d38-44f2-8bee-cd6703eadd7e",
+          "cabinetIds": [
+            "4b94af18-c155-43b8-9d3d-44e9ea17241c",
+            "08bd9126-f779-4cb4-a611-6412f4f7c869",
+            "1878f1da-4f4a-4bfe-8f1c-8e15521785be"
+          ],
+          "cabinets": [
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "blue",
+                  "green",
+                  "orange"
+                ],
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "purple",
+                  "rose",
+                  "blue"
+                ],
+                [
+                  "green",
+                  "orange",
+                  "yellow"
+                ],
+                [
+                  "lavender",
+                  "purple",
+                  "rose"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ],
+                [
+                  "orange",
+                  "yellow",
+                  "lavender"
+                ]
+              ],
+              "noticeLampOn": false
+            }
+          ],
+          "pose": {
+            "headYaw": 0.55,
+            "headPitch": 0,
+            "spinePitch": 0,
+            "chestRoll": 0,
+            "rightX": 0.184,
+            "rightY": 0.8230000000000001,
+            "rightZ": 0.307,
+            "leftX": -0.263,
+            "leftY": 0.8410000000000001,
+            "leftZ": 0.327,
+            "smile": 0,
+            "open": 0,
+            "frown": 0,
+            "blink": 0,
+            "press": 0,
+            "button": 2
+          },
+          "contacts": {
+            "space": "metres/world",
+            "rightButtonPad": [
+              0.15999999750164837,
+              0.7939999930818817,
+              0.199000004242592
+            ],
+            "leftButtonPad": [
+              -0.2390000018792239,
+              0.8120000011574624,
+              0.2190000008198773
+            ],
+            "leftLeverGrip": [
+              -0.2780000021695529,
+              0.7880000014956291,
+              0.22700000096068107
+            ],
+            "studySurfaceGaps": {
+              "rightStop": 8.491272495770133e-09,
+              "leftLever": 2.8047770076634034e-09
+            },
+            "arms": {
+              "R": {
+                "requestedDistance": 0.4266954005948794,
+                "solvedDistance": 0.4266954005948794,
+                "maxReach": 0.4985470504793882,
+                "clamped": false,
+                "requestedWrist": [
+                  0.184,
+                  0.8230000000000001,
+                  0.307
+                ],
+                "wrist": [
+                  0.1840000002929754,
+                  0.8229999987485819,
+                  0.3070000013350836
+                ],
+                "elbow": [
+                  0.28039041106005763,
+                  0.8146694928693242,
+                  0.4415900927694051
+                ],
+                "wristError": 1.8531946168423375e-09,
+                "elbowBendDegrees": 66.58360932762146
+              },
+              "L": {
+                "requestedDistance": 0.4115263878684529,
+                "solvedDistance": 0.4115263878684529,
+                "maxReach": 0.4290979802536183,
+                "clamped": false,
+                "requestedWrist": [
+                  -0.263,
+                  0.8410000000000001,
+                  0.327
+                ],
+                "wrist": [
+                  -0.2630000010470311,
+                  0.8410000016319704,
+                  0.32700000162403925
+                ],
+                "elbow": [
+                  -0.25419672372156743,
+                  0.8290664085637324,
+                  0.4221582242574201
+                ],
+                "wristError": 2.529249827295249e-09,
+                "elbowBendDegrees": 39.685442173055684
+              }
+            }
+          },
+          "contactChecks": {
+            "status": "passed",
+            "toleranceMetres": 0.001,
+            "maxStudySurfaceGapMetres": 8.491272495770133e-09,
+            "maxWristErrorMetres": 2.529249827295249e-09,
+            "clamped": false
+          }
+        },
+        {
+          "view": "side",
+          "label": "C：斜め前方の3/4視点",
+          "file": "images/360-side.png",
+          "sha256": "3b7595b81004c15466b4c7bf3926be07dc3bcea5bd52b0a0b77e35b7a149198e",
+          "pixels": [
+            652,
+            1164
+          ],
+          "sampledColors": 10423,
+          "layout": {
+            "stageWidth": 328,
+            "stageHeight": 583.109375,
+            "pageWidth": 360,
+            "viewport": 360,
+            "canvasWidth": 652,
+            "canvasHeight": 1162
+          },
+          "modelId": "a5b8e413-0d38-44f2-8bee-cd6703eadd7e",
+          "cabinetIds": [
+            "4b94af18-c155-43b8-9d3d-44e9ea17241c",
+            "08bd9126-f779-4cb4-a611-6412f4f7c869",
+            "1878f1da-4f4a-4bfe-8f1c-8e15521785be"
+          ],
+          "cabinets": [
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "blue",
+                  "green",
+                  "orange"
+                ],
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "purple",
+                  "rose",
+                  "blue"
+                ],
+                [
+                  "green",
+                  "orange",
+                  "yellow"
+                ],
+                [
+                  "lavender",
+                  "purple",
+                  "rose"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ],
+                [
+                  "orange",
+                  "yellow",
+                  "lavender"
+                ]
+              ],
+              "noticeLampOn": false
+            }
+          ],
+          "pose": {
+            "headYaw": 0.55,
+            "headPitch": 0,
+            "spinePitch": 0,
+            "chestRoll": 0,
+            "rightX": 0.184,
+            "rightY": 0.8230000000000001,
+            "rightZ": 0.307,
+            "leftX": -0.263,
+            "leftY": 0.8410000000000001,
+            "leftZ": 0.327,
+            "smile": 0,
+            "open": 0,
+            "frown": 0,
+            "blink": 0,
+            "press": 0,
+            "button": 2
+          },
+          "contacts": {
+            "space": "metres/world",
+            "rightButtonPad": [
+              0.15999999750164837,
+              0.7939999930818817,
+              0.199000004242592
+            ],
+            "leftButtonPad": [
+              -0.2390000018792239,
+              0.8120000011574624,
+              0.2190000008198773
+            ],
+            "leftLeverGrip": [
+              -0.2780000021695529,
+              0.7880000014956291,
+              0.22700000096068107
+            ],
+            "studySurfaceGaps": {
+              "rightStop": 8.491272495770133e-09,
+              "leftLever": 2.8047770076634034e-09
+            },
+            "arms": {
+              "R": {
+                "requestedDistance": 0.4266954005948794,
+                "solvedDistance": 0.4266954005948794,
+                "maxReach": 0.4985470504793882,
+                "clamped": false,
+                "requestedWrist": [
+                  0.184,
+                  0.8230000000000001,
+                  0.307
+                ],
+                "wrist": [
+                  0.1840000002929754,
+                  0.8229999987485819,
+                  0.3070000013350836
+                ],
+                "elbow": [
+                  0.28039041106005763,
+                  0.8146694928693242,
+                  0.4415900927694051
+                ],
+                "wristError": 1.8531946168423375e-09,
+                "elbowBendDegrees": 66.58360932762146
+              },
+              "L": {
+                "requestedDistance": 0.4115263878684529,
+                "solvedDistance": 0.4115263878684529,
+                "maxReach": 0.4290979802536183,
+                "clamped": false,
+                "requestedWrist": [
+                  -0.263,
+                  0.8410000000000001,
+                  0.327
+                ],
+                "wrist": [
+                  -0.2630000010470311,
+                  0.8410000016319704,
+                  0.32700000162403925
+                ],
+                "elbow": [
+                  -0.25419672372156743,
+                  0.8290664085637324,
+                  0.4221582242574201
+                ],
+                "wristError": 2.529249827295249e-09,
+                "elbowBendDegrees": 39.685442173055684
+              }
+            }
+          },
+          "contactChecks": {
+            "status": "passed",
+            "toleranceMetres": 0.001,
+            "maxStudySurfaceGapMetres": 8.491272495770133e-09,
+            "maxWristErrorMetres": 2.529249827295249e-09,
+            "clamped": false
+          }
+        }
+      ],
+      "cameraRigInvariants": {
+        "status": "passed",
+        "modelId": "a5b8e413-0d38-44f2-8bee-cd6703eadd7e",
+        "cabinetIds": [
+          "4b94af18-c155-43b8-9d3d-44e9ea17241c",
+          "08bd9126-f779-4cb4-a611-6412f4f7c869",
+          "1878f1da-4f4a-4bfe-8f1c-8e15521785be"
+        ],
+        "camerasCompared": [
+          "player",
+          "behind",
+          "side"
+        ],
+        "comparison": "Identical modelId, cabinetIds, cabinet states, pose and complete world-space contact diagnostics within this browser context"
+      },
+      "diagnostics": {
+        "ready": true,
+        "phase": "animated-rig",
+        "model": {
+          "source": "Blender / skinned GLB",
+          "bones": 17,
+          "skinnedMeshes": 28,
+          "triangles": 107966,
+          "animationClips": 0
+        },
+        "diagnostics": {
+          "camera": "side",
+          "triangles": 277630,
+          "drawCalls": 109,
+          "model": {
+            "source": "Blender / skinned GLB",
+            "bones": 17,
+            "skinnedMeshes": 28,
+            "triangles": 107966,
+            "animationClips": 0
+          },
+          "modelId": "a5b8e413-0d38-44f2-8bee-cd6703eadd7e",
+          "paused": true,
+          "mode": "idle",
+          "time": 0,
+          "pose": {
+            "headYaw": 0.55,
+            "headPitch": 0,
+            "spinePitch": 0,
+            "chestRoll": 0,
+            "rightX": 0.184,
+            "rightY": 0.8230000000000001,
+            "rightZ": 0.307,
+            "leftX": -0.263,
+            "leftY": 0.8410000000000001,
+            "leftZ": 0.327,
+            "smile": 0,
+            "open": 0,
+            "frown": 0,
+            "blink": 0,
+            "press": 0,
+            "button": 2
+          },
+          "contacts": {
+            "space": "metres/world",
+            "rightButtonPad": [
+              0.15999999750164837,
+              0.7939999930818817,
+              0.199000004242592
+            ],
+            "leftButtonPad": [
+              -0.2390000018792239,
+              0.8120000011574624,
+              0.2190000008198773
+            ],
+            "leftLeverGrip": [
+              -0.2780000021695529,
+              0.7880000014956291,
+              0.22700000096068107
+            ],
+            "studySurfaceGaps": {
+              "rightStop": 8.491272495770133e-09,
+              "leftLever": 2.8047770076634034e-09
+            },
+            "arms": {
+              "R": {
+                "requestedDistance": 0.4266954005948794,
+                "solvedDistance": 0.4266954005948794,
+                "maxReach": 0.4985470504793882,
+                "clamped": false,
+                "requestedWrist": [
+                  0.184,
+                  0.8230000000000001,
+                  0.307
+                ],
+                "wrist": [
+                  0.1840000002929754,
+                  0.8229999987485819,
+                  0.3070000013350836
+                ],
+                "elbow": [
+                  0.28039041106005763,
+                  0.8146694928693242,
+                  0.4415900927694051
+                ],
+                "wristError": 1.8531946168423375e-09,
+                "elbowBendDegrees": 66.58360932762146
+              },
+              "L": {
+                "requestedDistance": 0.4115263878684529,
+                "solvedDistance": 0.4115263878684529,
+                "maxReach": 0.4290979802536183,
+                "clamped": false,
+                "requestedWrist": [
+                  -0.263,
+                  0.8410000000000001,
+                  0.327
+                ],
+                "wrist": [
+                  -0.2630000010470311,
+                  0.8410000016319704,
+                  0.32700000162403925
+                ],
+                "elbow": [
+                  -0.25419672372156743,
+                  0.8290664085637324,
+                  0.4221582242574201
+                ],
+                "wristError": 2.529249827295249e-09,
+                "elbowBendDegrees": 39.685442173055684
+              }
+            }
+          },
+          "cabinetIds": [
+            "4b94af18-c155-43b8-9d3d-44e9ea17241c",
+            "08bd9126-f779-4cb4-a611-6412f4f7c869",
+            "1878f1da-4f4a-4bfe-8f1c-8e15521785be"
+          ],
+          "cabinets": [
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "blue",
+                  "green",
+                  "orange"
+                ],
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "purple",
+                  "rose",
+                  "blue"
+                ],
+                [
+                  "green",
+                  "orange",
+                  "yellow"
+                ],
+                [
+                  "lavender",
+                  "purple",
+                  "rose"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ],
+                [
+                  "orange",
+                  "yellow",
+                  "lavender"
+                ]
+              ],
+              "noticeLampOn": false
+            }
+          ]
+        }
+      },
+      "warnings": [],
+      "errors": [],
+      "failedRequests": []
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "pixelRatio": 2.0,
+      "captures": [
+        {
+          "view": "player",
+          "label": "A：打ち手操作視点",
+          "file": "images/390-player.png",
+          "sha256": "31f5f8db868b8f830fe3e8740657994f1903cf555a9201eb512af46e5f3cb7f9",
+          "pixels": [
+            668,
+            1190
+          ],
+          "sampledColors": 10643,
+          "layout": {
+            "stageWidth": 335,
+            "stageHeight": 595.546875,
+            "pageWidth": 390,
+            "viewport": 390,
+            "canvasWidth": 666,
+            "canvasHeight": 1188
+          },
+          "modelId": "068915a3-e36f-43c9-aad5-54927278cbba",
+          "cabinetIds": [
+            "ece3dce6-3d5d-42d3-8253-09e3d62d1930",
+            "90c3773e-8798-484d-ac1c-05c66792fabc",
+            "3482942a-de10-4f3b-ab7f-ef2e512cc643"
+          ],
+          "cabinets": [
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "blue",
+                  "green",
+                  "orange"
+                ],
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "purple",
+                  "rose",
+                  "blue"
+                ],
+                [
+                  "green",
+                  "orange",
+                  "yellow"
+                ],
+                [
+                  "lavender",
+                  "purple",
+                  "rose"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ],
+                [
+                  "orange",
+                  "yellow",
+                  "lavender"
+                ]
+              ],
+              "noticeLampOn": false
+            }
+          ],
+          "pose": {
+            "headYaw": 0.55,
+            "headPitch": 0,
+            "spinePitch": 0,
+            "chestRoll": 0,
+            "rightX": 0.184,
+            "rightY": 0.8230000000000001,
+            "rightZ": 0.307,
+            "leftX": -0.263,
+            "leftY": 0.8410000000000001,
+            "leftZ": 0.327,
+            "smile": 0,
+            "open": 0,
+            "frown": 0,
+            "blink": 0,
+            "press": 0,
+            "button": 2
+          },
+          "contacts": {
+            "space": "metres/world",
+            "rightButtonPad": [
+              0.15999999750164837,
+              0.7939999930818817,
+              0.199000004242592
+            ],
+            "leftButtonPad": [
+              -0.2390000018792239,
+              0.8120000011574624,
+              0.2190000008198773
+            ],
+            "leftLeverGrip": [
+              -0.2780000021695529,
+              0.7880000014956291,
+              0.22700000096068107
+            ],
+            "studySurfaceGaps": {
+              "rightStop": 8.491272495770133e-09,
+              "leftLever": 2.8047770076634034e-09
+            },
+            "arms": {
+              "R": {
+                "requestedDistance": 0.4266954005948794,
+                "solvedDistance": 0.4266954005948794,
+                "maxReach": 0.4985470504793882,
+                "clamped": false,
+                "requestedWrist": [
+                  0.184,
+                  0.8230000000000001,
+                  0.307
+                ],
+                "wrist": [
+                  0.1840000002929754,
+                  0.8229999987485819,
+                  0.3070000013350836
+                ],
+                "elbow": [
+                  0.28039041106005763,
+                  0.8146694928693242,
+                  0.4415900927694051
+                ],
+                "wristError": 1.8531946168423375e-09,
+                "elbowBendDegrees": 66.58360932762146
+              },
+              "L": {
+                "requestedDistance": 0.4115263878684529,
+                "solvedDistance": 0.4115263878684529,
+                "maxReach": 0.4290979802536183,
+                "clamped": false,
+                "requestedWrist": [
+                  -0.263,
+                  0.8410000000000001,
+                  0.327
+                ],
+                "wrist": [
+                  -0.2630000010470311,
+                  0.8410000016319704,
+                  0.32700000162403925
+                ],
+                "elbow": [
+                  -0.25419672372156743,
+                  0.8290664085637324,
+                  0.4221582242574201
+                ],
+                "wristError": 2.529249827295249e-09,
+                "elbowBendDegrees": 39.685442173055684
+              }
+            }
+          },
+          "contactChecks": {
+            "status": "passed",
+            "toleranceMetres": 0.001,
+            "maxStudySurfaceGapMetres": 8.491272495770133e-09,
+            "maxWristErrorMetres": 2.529249827295249e-09,
+            "clamped": false
+          }
+        },
+        {
+          "view": "behind",
+          "label": "B：背後からの肩越し",
+          "file": "images/390-behind.png",
+          "sha256": "a8645a5cde921deaa94a6baa779ef875fa3cb7e6e6bf34388ac909fbaa32da90",
+          "pixels": [
+            668,
+            1190
+          ],
+          "sampledColors": 10830,
+          "layout": {
+            "stageWidth": 335,
+            "stageHeight": 595.546875,
+            "pageWidth": 390,
+            "viewport": 390,
+            "canvasWidth": 666,
+            "canvasHeight": 1188
+          },
+          "modelId": "068915a3-e36f-43c9-aad5-54927278cbba",
+          "cabinetIds": [
+            "ece3dce6-3d5d-42d3-8253-09e3d62d1930",
+            "90c3773e-8798-484d-ac1c-05c66792fabc",
+            "3482942a-de10-4f3b-ab7f-ef2e512cc643"
+          ],
+          "cabinets": [
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "blue",
+                  "green",
+                  "orange"
+                ],
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "purple",
+                  "rose",
+                  "blue"
+                ],
+                [
+                  "green",
+                  "orange",
+                  "yellow"
+                ],
+                [
+                  "lavender",
+                  "purple",
+                  "rose"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ],
+                [
+                  "orange",
+                  "yellow",
+                  "lavender"
+                ]
+              ],
+              "noticeLampOn": false
+            }
+          ],
+          "pose": {
+            "headYaw": 0.55,
+            "headPitch": 0,
+            "spinePitch": 0,
+            "chestRoll": 0,
+            "rightX": 0.184,
+            "rightY": 0.8230000000000001,
+            "rightZ": 0.307,
+            "leftX": -0.263,
+            "leftY": 0.8410000000000001,
+            "leftZ": 0.327,
+            "smile": 0,
+            "open": 0,
+            "frown": 0,
+            "blink": 0,
+            "press": 0,
+            "button": 2
+          },
+          "contacts": {
+            "space": "metres/world",
+            "rightButtonPad": [
+              0.15999999750164837,
+              0.7939999930818817,
+              0.199000004242592
+            ],
+            "leftButtonPad": [
+              -0.2390000018792239,
+              0.8120000011574624,
+              0.2190000008198773
+            ],
+            "leftLeverGrip": [
+              -0.2780000021695529,
+              0.7880000014956291,
+              0.22700000096068107
+            ],
+            "studySurfaceGaps": {
+              "rightStop": 8.491272495770133e-09,
+              "leftLever": 2.8047770076634034e-09
+            },
+            "arms": {
+              "R": {
+                "requestedDistance": 0.4266954005948794,
+                "solvedDistance": 0.4266954005948794,
+                "maxReach": 0.4985470504793882,
+                "clamped": false,
+                "requestedWrist": [
+                  0.184,
+                  0.8230000000000001,
+                  0.307
+                ],
+                "wrist": [
+                  0.1840000002929754,
+                  0.8229999987485819,
+                  0.3070000013350836
+                ],
+                "elbow": [
+                  0.28039041106005763,
+                  0.8146694928693242,
+                  0.4415900927694051
+                ],
+                "wristError": 1.8531946168423375e-09,
+                "elbowBendDegrees": 66.58360932762146
+              },
+              "L": {
+                "requestedDistance": 0.4115263878684529,
+                "solvedDistance": 0.4115263878684529,
+                "maxReach": 0.4290979802536183,
+                "clamped": false,
+                "requestedWrist": [
+                  -0.263,
+                  0.8410000000000001,
+                  0.327
+                ],
+                "wrist": [
+                  -0.2630000010470311,
+                  0.8410000016319704,
+                  0.32700000162403925
+                ],
+                "elbow": [
+                  -0.25419672372156743,
+                  0.8290664085637324,
+                  0.4221582242574201
+                ],
+                "wristError": 2.529249827295249e-09,
+                "elbowBendDegrees": 39.685442173055684
+              }
+            }
+          },
+          "contactChecks": {
+            "status": "passed",
+            "toleranceMetres": 0.001,
+            "maxStudySurfaceGapMetres": 8.491272495770133e-09,
+            "maxWristErrorMetres": 2.529249827295249e-09,
+            "clamped": false
+          }
+        },
+        {
+          "view": "side",
+          "label": "C：斜め前方の3/4視点",
+          "file": "images/390-side.png",
+          "sha256": "f7c6cd69dd91489b7a3cd173ebed7c453f19bed471bd3bc66cca15e2e0a1bb46",
+          "pixels": [
+            668,
+            1190
+          ],
+          "sampledColors": 10530,
+          "layout": {
+            "stageWidth": 335,
+            "stageHeight": 595.546875,
+            "pageWidth": 390,
+            "viewport": 390,
+            "canvasWidth": 666,
+            "canvasHeight": 1188
+          },
+          "modelId": "068915a3-e36f-43c9-aad5-54927278cbba",
+          "cabinetIds": [
+            "ece3dce6-3d5d-42d3-8253-09e3d62d1930",
+            "90c3773e-8798-484d-ac1c-05c66792fabc",
+            "3482942a-de10-4f3b-ab7f-ef2e512cc643"
+          ],
+          "cabinets": [
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "blue",
+                  "green",
+                  "orange"
+                ],
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "purple",
+                  "rose",
+                  "blue"
+                ],
+                [
+                  "green",
+                  "orange",
+                  "yellow"
+                ],
+                [
+                  "lavender",
+                  "purple",
+                  "rose"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ],
+                [
+                  "orange",
+                  "yellow",
+                  "lavender"
+                ]
+              ],
+              "noticeLampOn": false
+            }
+          ],
+          "pose": {
+            "headYaw": 0.55,
+            "headPitch": 0,
+            "spinePitch": 0,
+            "chestRoll": 0,
+            "rightX": 0.184,
+            "rightY": 0.8230000000000001,
+            "rightZ": 0.307,
+            "leftX": -0.263,
+            "leftY": 0.8410000000000001,
+            "leftZ": 0.327,
+            "smile": 0,
+            "open": 0,
+            "frown": 0,
+            "blink": 0,
+            "press": 0,
+            "button": 2
+          },
+          "contacts": {
+            "space": "metres/world",
+            "rightButtonPad": [
+              0.15999999750164837,
+              0.7939999930818817,
+              0.199000004242592
+            ],
+            "leftButtonPad": [
+              -0.2390000018792239,
+              0.8120000011574624,
+              0.2190000008198773
+            ],
+            "leftLeverGrip": [
+              -0.2780000021695529,
+              0.7880000014956291,
+              0.22700000096068107
+            ],
+            "studySurfaceGaps": {
+              "rightStop": 8.491272495770133e-09,
+              "leftLever": 2.8047770076634034e-09
+            },
+            "arms": {
+              "R": {
+                "requestedDistance": 0.4266954005948794,
+                "solvedDistance": 0.4266954005948794,
+                "maxReach": 0.4985470504793882,
+                "clamped": false,
+                "requestedWrist": [
+                  0.184,
+                  0.8230000000000001,
+                  0.307
+                ],
+                "wrist": [
+                  0.1840000002929754,
+                  0.8229999987485819,
+                  0.3070000013350836
+                ],
+                "elbow": [
+                  0.28039041106005763,
+                  0.8146694928693242,
+                  0.4415900927694051
+                ],
+                "wristError": 1.8531946168423375e-09,
+                "elbowBendDegrees": 66.58360932762146
+              },
+              "L": {
+                "requestedDistance": 0.4115263878684529,
+                "solvedDistance": 0.4115263878684529,
+                "maxReach": 0.4290979802536183,
+                "clamped": false,
+                "requestedWrist": [
+                  -0.263,
+                  0.8410000000000001,
+                  0.327
+                ],
+                "wrist": [
+                  -0.2630000010470311,
+                  0.8410000016319704,
+                  0.32700000162403925
+                ],
+                "elbow": [
+                  -0.25419672372156743,
+                  0.8290664085637324,
+                  0.4221582242574201
+                ],
+                "wristError": 2.529249827295249e-09,
+                "elbowBendDegrees": 39.685442173055684
+              }
+            }
+          },
+          "contactChecks": {
+            "status": "passed",
+            "toleranceMetres": 0.001,
+            "maxStudySurfaceGapMetres": 8.491272495770133e-09,
+            "maxWristErrorMetres": 2.529249827295249e-09,
+            "clamped": false
+          }
+        }
+      ],
+      "cameraRigInvariants": {
+        "status": "passed",
+        "modelId": "068915a3-e36f-43c9-aad5-54927278cbba",
+        "cabinetIds": [
+          "ece3dce6-3d5d-42d3-8253-09e3d62d1930",
+          "90c3773e-8798-484d-ac1c-05c66792fabc",
+          "3482942a-de10-4f3b-ab7f-ef2e512cc643"
+        ],
+        "camerasCompared": [
+          "player",
+          "behind",
+          "side"
+        ],
+        "comparison": "Identical modelId, cabinetIds, cabinet states, pose and complete world-space contact diagnostics within this browser context"
+      },
+      "diagnostics": {
+        "ready": true,
+        "phase": "animated-rig",
+        "model": {
+          "source": "Blender / skinned GLB",
+          "bones": 17,
+          "skinnedMeshes": 28,
+          "triangles": 107966,
+          "animationClips": 0
+        },
+        "diagnostics": {
+          "camera": "side",
+          "triangles": 277630,
+          "drawCalls": 109,
+          "model": {
+            "source": "Blender / skinned GLB",
+            "bones": 17,
+            "skinnedMeshes": 28,
+            "triangles": 107966,
+            "animationClips": 0
+          },
+          "modelId": "068915a3-e36f-43c9-aad5-54927278cbba",
+          "paused": true,
+          "mode": "idle",
+          "time": 0,
+          "pose": {
+            "headYaw": 0.55,
+            "headPitch": 0,
+            "spinePitch": 0,
+            "chestRoll": 0,
+            "rightX": 0.184,
+            "rightY": 0.8230000000000001,
+            "rightZ": 0.307,
+            "leftX": -0.263,
+            "leftY": 0.8410000000000001,
+            "leftZ": 0.327,
+            "smile": 0,
+            "open": 0,
+            "frown": 0,
+            "blink": 0,
+            "press": 0,
+            "button": 2
+          },
+          "contacts": {
+            "space": "metres/world",
+            "rightButtonPad": [
+              0.15999999750164837,
+              0.7939999930818817,
+              0.199000004242592
+            ],
+            "leftButtonPad": [
+              -0.2390000018792239,
+              0.8120000011574624,
+              0.2190000008198773
+            ],
+            "leftLeverGrip": [
+              -0.2780000021695529,
+              0.7880000014956291,
+              0.22700000096068107
+            ],
+            "studySurfaceGaps": {
+              "rightStop": 8.491272495770133e-09,
+              "leftLever": 2.8047770076634034e-09
+            },
+            "arms": {
+              "R": {
+                "requestedDistance": 0.4266954005948794,
+                "solvedDistance": 0.4266954005948794,
+                "maxReach": 0.4985470504793882,
+                "clamped": false,
+                "requestedWrist": [
+                  0.184,
+                  0.8230000000000001,
+                  0.307
+                ],
+                "wrist": [
+                  0.1840000002929754,
+                  0.8229999987485819,
+                  0.3070000013350836
+                ],
+                "elbow": [
+                  0.28039041106005763,
+                  0.8146694928693242,
+                  0.4415900927694051
+                ],
+                "wristError": 1.8531946168423375e-09,
+                "elbowBendDegrees": 66.58360932762146
+              },
+              "L": {
+                "requestedDistance": 0.4115263878684529,
+                "solvedDistance": 0.4115263878684529,
+                "maxReach": 0.4290979802536183,
+                "clamped": false,
+                "requestedWrist": [
+                  -0.263,
+                  0.8410000000000001,
+                  0.327
+                ],
+                "wrist": [
+                  -0.2630000010470311,
+                  0.8410000016319704,
+                  0.32700000162403925
+                ],
+                "elbow": [
+                  -0.25419672372156743,
+                  0.8290664085637324,
+                  0.4221582242574201
+                ],
+                "wristError": 2.529249827295249e-09,
+                "elbowBendDegrees": 39.685442173055684
+              }
+            }
+          },
+          "cabinetIds": [
+            "ece3dce6-3d5d-42d3-8253-09e3d62d1930",
+            "90c3773e-8798-484d-ac1c-05c66792fabc",
+            "3482942a-de10-4f3b-ab7f-ef2e512cc643"
+          ],
+          "cabinets": [
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "blue",
+                  "green",
+                  "orange"
+                ],
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "purple",
+                  "rose",
+                  "blue"
+                ],
+                [
+                  "green",
+                  "orange",
+                  "yellow"
+                ],
+                [
+                  "lavender",
+                  "purple",
+                  "rose"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ],
+                [
+                  "orange",
+                  "yellow",
+                  "lavender"
+                ]
+              ],
+              "noticeLampOn": false
+            }
+          ]
+        }
+      },
+      "warnings": [],
+      "errors": [],
+      "failedRequests": []
+    }
+  ],
+  "motion": {
+    "viewport": [
+      390,
+      844
+    ],
+    "pixelRatio": 1.0,
+    "motion": "passed",
+    "pauseResume": "passed",
+    "glasses": "passed",
+    "touch": "passed",
+    "poses": {
+      "look": {
+        "headYaw": -0.5598855369473938,
+        "headPitch": 0.02499688997394535,
+        "spinePitch": 0.002280093750682222,
+        "chestRoll": 0,
+        "rightX": 0.1839998802038202,
+        "rightY": 0.8080018959468327,
+        "rightZ": 0.35699393333119495,
+        "leftX": -0.2629999408506362,
+        "leftY": 0.8409999865229298,
+        "leftZ": 0.32699998876910813,
+        "smile": 0,
+        "open": 0,
+        "frown": 0,
+        "blink": 0,
+        "press": 5.327576768580288e-05,
+        "button": 2
+      },
+      "sad": {
+        "headYaw": 0.39982057284138306,
+        "headPitch": -0.2299523345590041,
+        "spinePitch": -0.07276195911427212,
+        "chestRoll": -0.02499532686055497,
+        "rightX": 0.18399999997760702,
+        "rightY": 0.7480112158890692,
+        "rightZ": 0.41698878333131634,
+        "leftX": -0.26299999998894347,
+        "leftY": 0.7910093462763709,
+        "leftZ": 0.3869887844632326,
+        "smile": 0,
+        "open": 0,
+        "frown": 0.8798355054915349,
+        "blink": 0,
+        "press": 9.95860365747443e-09,
+        "button": 2
+      },
+      "pretend": {
+        "headYaw": 0.32001508855569155,
+        "headPitch": -0.0450349617085037,
+        "spinePitch": -0.02278766251194811,
+        "chestRoll": -4.724889435632246e-06,
+        "rightX": 0.18369097792432088,
+        "rightY": 0.823063056816001,
+        "rightZ": 0.3055920881735341,
+        "leftX": -0.2628474203501334,
+        "leftY": 0.8409557852376149,
+        "leftZ": 0.3269823689150506,
+        "smile": 0.05998865814527173,
+        "open": 0,
+        "frown": 0.18013229054394944,
+        "blink": 0,
+        "press": 0.717414307950519,
+        "button": 2
+      }
+    },
+    "initialDiagnostics": {
+      "ready": true,
+      "phase": "animated-rig",
+      "model": {
+        "source": "Blender / skinned GLB",
+        "bones": 17,
+        "skinnedMeshes": 28,
+        "triangles": 107966,
+        "animationClips": 0
+      },
+      "diagnostics": {
+        "camera": "side",
+        "triangles": 277630,
+        "drawCalls": 109,
+        "model": {
+          "source": "Blender / skinned GLB",
+          "bones": 17,
+          "skinnedMeshes": 28,
+          "triangles": 107966,
+          "animationClips": 0
+        },
+        "modelId": "83462787-c7a3-4d65-965d-f79f4764d616",
+        "paused": true,
+        "mode": "idle",
+        "time": 0,
+        "pose": {
+          "headYaw": 0.55,
+          "headPitch": 0,
+          "spinePitch": 0,
+          "chestRoll": 0,
+          "rightX": 0.184,
+          "rightY": 0.8230000000000001,
+          "rightZ": 0.307,
+          "leftX": -0.263,
+          "leftY": 0.8410000000000001,
+          "leftZ": 0.327,
+          "smile": 0,
+          "open": 0,
+          "frown": 0,
+          "blink": 0,
+          "press": 0,
+          "button": 2
+        },
+        "contacts": {
+          "space": "metres/world",
+          "rightButtonPad": [
+            0.15999999750164837,
+            0.7939999930818817,
+            0.199000004242592
+          ],
+          "leftButtonPad": [
+            -0.2390000018792239,
+            0.8120000011574624,
+            0.2190000008198773
+          ],
+          "leftLeverGrip": [
+            -0.2780000021695529,
+            0.7880000014956291,
+            0.22700000096068107
+          ],
+          "studySurfaceGaps": {
+            "rightStop": 8.491272495770133e-09,
+            "leftLever": 2.8047770076634034e-09
+          },
+          "arms": {
+            "R": {
+              "requestedDistance": 0.4266954005948794,
+              "solvedDistance": 0.4266954005948794,
+              "maxReach": 0.4985470504793882,
+              "clamped": false,
+              "requestedWrist": [
+                0.184,
+                0.8230000000000001,
+                0.307
+              ],
+              "wrist": [
+                0.1840000002929754,
+                0.8229999987485819,
+                0.3070000013350836
+              ],
+              "elbow": [
+                0.28039041106005763,
+                0.8146694928693242,
+                0.4415900927694051
+              ],
+              "wristError": 1.8531946168423375e-09,
+              "elbowBendDegrees": 66.58360932762146
+            },
+            "L": {
+              "requestedDistance": 0.4115263878684529,
+              "solvedDistance": 0.4115263878684529,
+              "maxReach": 0.4290979802536183,
+              "clamped": false,
+              "requestedWrist": [
+                -0.263,
+                0.8410000000000001,
+                0.327
+              ],
+              "wrist": [
+                -0.2630000010470311,
+                0.8410000016319704,
+                0.32700000162403925
+              ],
+              "elbow": [
+                -0.25419672372156743,
+                0.8290664085637324,
+                0.4221582242574201
+              ],
+              "wristError": 2.529249827295249e-09,
+              "elbowBendDegrees": 39.685442173055684
+            }
+          }
+        },
+        "cabinetIds": [
+          "356e9619-b665-4e33-a747-9a76742bf35d",
+          "df355c47-a43c-495f-a5fb-e927fac024a6",
+          "303a5d58-d77e-46de-a21e-3ea1e89e3f57"
+        ],
+        "cabinets": [
+          {
+            "phase": "normal",
+            "reels": [
+              [
+                "blue",
+                "green",
+                "orange"
+              ],
+              [
+                "yellow",
+                "lavender",
+                "purple"
+              ],
+              [
+                "rose",
+                "blue",
+                "green"
+              ]
+            ],
+            "noticeLampOn": false
+          },
+          {
+            "phase": "normal",
+            "reels": [
+              [
+                "purple",
+                "rose",
+                "blue"
+              ],
+              [
+                "green",
+                "orange",
+                "yellow"
+              ],
+              [
+                "lavender",
+                "purple",
+                "rose"
+              ]
+            ],
+            "noticeLampOn": false
+          },
+          {
+            "phase": "normal",
+            "reels": [
+              [
+                "yellow",
+                "lavender",
+                "purple"
+              ],
+              [
+                "rose",
+                "blue",
+                "green"
+              ],
+              [
+                "orange",
+                "yellow",
+                "lavender"
+              ]
+            ],
+            "noticeLampOn": false
+          }
+        ]
+      }
+    },
+    "errors": [],
+    "warnings": [],
+    "failedRequests": [],
+    "studyReset": "passed",
+    "captures": [
+      {
+        "file": "images/390-play-paused.png",
+        "sha256": "4420cb22169c844615340c4d92635dd156b1bbe73609ba5999ae67e5dbcdce79",
+        "pixels": [
+          334,
+          595
+        ]
+      },
+      {
+        "file": "images/390-glasses.png",
+        "sha256": "bc92668bfacccd3b1b25bfb521a2521f7b2bc30326cdb7be070eee9ab878c32e",
+        "pixels": [
+          334,
+          595
+        ]
+      },
+      {
+        "file": "images/390-motion-look.png",
+        "sha256": "832b037ccbf4a77fd98dbeeaa9f0567e8ff4074088ae13684e1419ebd6f411eb",
+        "pixels": [
+          334,
+          595
+        ]
+      },
+      {
+        "file": "images/390-motion-sad.png",
+        "sha256": "c897502552a38ae069ea4537b938bd64847fab9bd6531361ceddb843f11e739b",
+        "pixels": [
+          334,
+          595
+        ]
+      },
+      {
+        "file": "images/390-motion-pretend.png",
+        "sha256": "a45718c38dd229933b6e5a84af4540d3386c2814011ae54200dc26c90295a3b0",
+        "pixels": [
+          334,
+          595
+        ]
+      },
+      {
+        "file": "images/390-glasses-study.png",
+        "sha256": "4f8418b5246bd56bdb66dfbd89b5380396644c1674baf87a968a844c28ccc230",
+        "pixels": [
+          334,
+          595
+        ]
+      }
+    ]
+  },
+  "sourceCommit": "542d587432c8193aa0c5c7cc2d4ec0b29196c078",
+  "execution": {
+    "renderer": "Headless Chromium / ANGLE SwiftShader software WebGL",
+    "sourceCommit": "542d587432c8193aa0c5c7cc2d4ec0b29196c078",
+    "static": {
+      "sourceCommit": "542d587432c8193aa0c5c7cc2d4ec0b29196c078",
+      "startedAtUTC": "2026-10-23T21:43:45.319822+00:00",
+      "command": "python tests/visual-review.py --phase static --device-scale-factor 2 --output-dir review --interface",
+      "renderer": "Headless Chromium / ANGLE SwiftShader software WebGL",
+      "staticPixelRatio": 2,
+      "motionExecuted": false,
+      "productionFilesMatchSourceCommit": true,
+      "productionSha256": {
+        "app.js": "681dd2eb1ca90fcb22a68489bd1253141052e923779215d527a28232feab7c33",
+        "camera-views.js": "afabbeed16c7d34d7127349dd48b9b07d5be95323161c8e73592742c1f18dd8a",
+        "index.html": "4b5cd998c725127b3c413e655a860308c7e970f5598743c84bf9f39beebead65",
+        "style.css": "4d505af532c02e34d5033848b68924a72cbbbc61d99a816c9c11951a57762c04",
+        "slot-state.js": "b54450bd322a1b2fe4478862eb0c646c3517a340a22f1738c435dd27b7e1cd1e",
+        "slot-timeline.js": "76f174512ce354496e6db54e75a92bdc1a922486e67b6cfcc8c8561dcc393dff",
+        "scene/cabinet.js": "5282cf36fe0a5a1d43a251bd851566ad7eb86e18571a3680851df6cb3f9dce6e",
+        "scene/character.js": "d8cbd1e2c07db2092f3917278fc5af92e3a2c0496b44489c4cd93a96c621ecae",
+        "scene/geometry.js": "93c2ba37882dbf83ea41e0383128da739b12b6f5dccf55ca29e3cf5db479557c",
+        "scene/motion.js": "551ad1343cad635c2d5a9e0d5280334a76ec133c639607d49f85040f3743e2e9",
+        "scene/operation-layout.js": "284059b69bfe01af9f81a4e6ac4f68e2e49ea5fc6def93a7f46bca557ec019ea",
+        "scene/room.js": "d54ca60214d03be2939f428d2c472683f3559d58e4a702f3142e762a184e55ad",
+        "assets/character.glb": "86329b6d10286cfb9804888ecd031dd7cb2c1554b1f9f2341a4c3b6f62bd911c"
+      },
+      "testScriptSha256": "24c087414c4320ba62970510a85f6e7f91a25f382cbdd780c9237321026487d9",
+      "completedAtUTC": "2026-10-23T21:44:30.695052+00:00",
+      "productionUnchangedDuringCapture": true,
+      "realPhonePerformanceMeasured": false
+    },
+    "motion": {
+      "command": "python tests/visual-review.py --phase motion --device-scale-factor 1 --output-dir review",
+      "viewport": [
+        390,
+        844
+      ],
+      "pixelRatio": 1,
+      "status": "passed",
+      "afterStaticVisualReview": true
+    },
+    "smoke": {
+      "command": "python tests/browser-smoke.py",
+      "pixelRatio": 1,
+      "status": "passed",
+      "viewports": [
+        [
+          360,
+          800
+        ],
+        [
+          390,
+          844
+        ],
+        [
+          1280,
+          900
+        ]
+      ]
+    },
+    "pagesSubpath": {
+      "path": "/PachiAruCG/",
+      "viewport": [
+        390,
+        844
+      ],
+      "pixelRatio": 1,
+      "camera": "side",
+      "status": "passed",
+      "additionalModuleChecked": "scene/operation-layout.js"
+    },
+    "order": "Static DPR2, human image review, motion DPR1, smoke DPR1, one Pages-prefix DPR1 load; no concurrent browsers",
+    "productionUnchangedAcrossAllChecks": true,
+    "realPhonePerformanceMeasured": false,
+    "completedAtUTC": "2026-10-23T21:50:57.656570+00:00"
+  },
+  "browserSmoke": {
+    "tests": [
+      {
+        "viewport": "360×800",
+        "cameras": 3,
+        "touchControls": "passed",
+        "portraitAndOverflow": "passed",
+        "pauseAndResume": "passed",
+        "pageErrors": [],
+        "bonusSequence": "checked at 390px"
+      },
+      {
+        "viewport": "390×844",
+        "cameras": 3,
+        "touchControls": "passed",
+        "portraitAndOverflow": "passed",
+        "pauseAndResume": "passed",
+        "pageErrors": [],
+        "bonusSequence": "passed"
+      },
+      {
+        "viewport": "1280×900",
+        "cameras": 3,
+        "touchControls": "passed",
+        "portraitAndOverflow": "passed",
+        "pauseAndResume": "passed",
+        "pageErrors": [],
+        "bonusSequence": "checked at 390px"
+      }
+    ],
+    "screenshots": "/tmp/pachiarucg-browser",
+    "tls": "normal verification; bundled production modules",
+    "status": "passed",
+    "failedRequests": [],
+    "bonusImages": [
+      {
+        "file": "images/390-bonus-notified.png",
+        "sha256": "d2aa4683576d642c469ede985b7495018aa8b2dd8abe89a84457bb24fe758370",
+        "pixels": [
+          334,
+          595
+        ]
+      },
+      {
+        "file": "images/390-bonus-aligned.png",
+        "sha256": "5c462492a381fdef7499b5edc8158c957f2fe4857e5f8ea389774b2c1f4063bc",
+        "pixels": [
+          334,
+          595
+        ]
+      }
+    ]
+  },
+  "pagesSubpath": {
+    "status": "passed",
+    "path": "/PachiAruCG/",
+    "viewport": [
+      390,
+      844
+    ],
+    "pixelRatio": 1,
+    "camera": "side",
+    "image": "images/390-pages-subpath-side.png",
+    "layout": {
+      "stageWidth": 335,
+      "stageHeight": 595.546875,
+      "pageWidth": 390,
+      "viewport": 390,
+      "canvasWidth": 333,
+      "canvasHeight": 594
+    },
+    "frame": {
+      "pixels": [
+        334,
+        595
+      ],
+      "sampledColors": 10666
+    },
+    "responses": [
+      {
+        "path": "/PachiAruCG/",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/style.css",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/app.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/slot-timeline.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/scene/character.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/scene/room.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/vendor/three/addons/environments/RoomEnvironment.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/scene/cabinet.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/camera-views.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/scene/operation-layout.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/scene/motion.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/slot-state.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/scene/geometry.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/vendor/three/addons/loaders/GLTFLoader.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/vendor/three/addons/utils/BufferGeometryUtils.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/vendor/three/addons/geometries/RoundedBoxGeometry.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/vendor/three/three.module.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/assets/character.glb",
+        "status": 200
+      }
+    ],
+    "errors": [],
+    "failedRequests": [],
+    "operationLayoutModule": "loaded from /PachiAruCG/scene/operation-layout.js",
+    "model": {
+      "source": "Blender / skinned GLB",
+      "bones": 17,
+      "skinnedMeshes": 28,
+      "triangles": 107966,
+      "animationClips": 0
+    },
+    "tls": "normal verification; no certificate or trust overrides",
+    "capture": {
+      "file": "images/390-pages-subpath-side.png",
+      "sha256": "f94b72c6f90fe39e2e683f51515eca069eb2eb8a240a9e646eda18997ca9aac1",
+      "pixels": [
+        334,
+        595
+      ]
+    }
+  },
+  "interfaceCaptures": [
+    {
+      "file": "images/360-interface.png",
+      "sha256": "54c3e8f0d2ad1c47311270de83523d669a822bced2a58fde9a532b2d18cc35c5",
+      "pixels": [
+        720,
+        4424
+      ]
+    },
+    {
+      "file": "images/390-interface.png",
+      "sha256": "25e88e3335ea414b98268211069ea7c825653972a5ca1e3165628dec01d66562",
+      "pixels": [
+        780,
+        4366
+      ]
+    }
+  ],
+  "visualInspection": {
+    "method": "Inspected the actual saved browser screenshots at 360×800 and 390×844 and the settled motion states.",
+    "static": "The unusual triangular reel shadows are gone. A shows the complete cabinet, reels and operation controls. B keeps the main reel window visible beside the head and shoulders. C shows the eyes, mouth, operating hands, chair and feet with restrained ceiling and island details. The cuff, elbow and wrist connections and the seated body have no obvious breaks or penetrations in the inspected frames.",
+    "identity": "Within each viewport browser context, all three camera captures have exactly the same person model ID, three cabinet IDs, pose, actual world-space contact diagnostics and cabinet states. Only visibility and camera framing differ.",
+    "motion": "Look visibly turns the head; sad lowers the head and shoulders; pretend returns the operating hand toward the buttons. No obvious broken limb connections or new body/chair/cabinet penetration in the inspected paused frames.",
+    "glasses": "The glasses visibly attach to and detach from the same model; the study screenshot shows both lenses and the side arm.",
+    "bonus": "Notification shows gold LCD art while the reels remain scattered rectangles; entry shows three fictional red sevens across the center row. These are separate rendered states.",
+    "pages": "The /PachiAruCG/ screenshot shows the same C composition, with the new operation-layout module and GLB resolving beneath the prefix."
+  },
+  "unitChecks": {
+    "status": "passed",
+    "nodeVersion": "v24.19.0",
+    "cases": 49,
+    "preservedCases": 45,
+    "newContactCases": 4,
+    "commands": [
+      "npm run check",
+      "npm test",
+      "node --test --test-isolation=none"
+    ]
+  }
+}

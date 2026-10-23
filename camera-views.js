@@ -1,23 +1,29 @@
-// Shot labels stay in the controls, outside the rendered portrait frame.
+// Calibrated for the seated, metre-scale study: cabinet front z=0, player z=.72.
+// Shot labels stay in the controls, outside the rendered 9:16 frame.
 export const CAMERA_VIEWS = Object.freeze({
   player: Object.freeze({
-    label: '打ち手視点',
-    // Just ahead of the seated player's eyes, clear of the head and glasses.
-    position: Object.freeze([0.43, 2.415, 0.67]),
-    target: Object.freeze([0.43, 1.75, -0.54]),
-    fov: 82,
+    label: 'A：打ち手操作視点',
+    // A lifted operating insert, rather than a wide-angle camera inside the head.
+    // The static operating insert excludes the player and chair so the complete
+    // reel window and control deck remain readable without detached shoulders.
+    position: Object.freeze([-0.32, 1.98, 2.55]),
+    target: Object.freeze([0, 1.00, 0]),
+    fov: 44,
   }),
   behind: Object.freeze({
-    label: '背後視点',
-    position: Object.freeze([2.9, 3.1, 6.3]),
-    target: Object.freeze([0.43, 1.55, 0.05]),
+    label: 'B：背後からの肩越し',
+    // Lateral parallax keeps the protagonist's head clear of the three reels.
+    position: Object.freeze([-2.35, 1.78, 3.10]),
+    target: Object.freeze([0.05, 0.98, 0.31]),
     fov: 38,
   }),
   side: Object.freeze({
-    label: '横からの視点',
-    position: Object.freeze([-7.5, 3.1, 0.1]),
-    target: Object.freeze([0.43, 1.55, 0.75]),
-    fov: 38,
+    label: 'C：斜め前からの3/4',
+    // Ahead of the player, on the cabinet's open side. The study pose includes
+    // a gentle head turn toward this side, shared by all three camera views.
+    position: Object.freeze([-2.60, 1.55, 0.70]),
+    target: Object.freeze([0, 0.94, 0.42]),
+    fov: 49,
   }),
 });
 

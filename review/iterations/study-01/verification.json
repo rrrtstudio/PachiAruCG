@@ -1,0 +1,709 @@
+{
+  "phase": "all",
+  "source": "real Chromium WebGL rendering",
+  "tls": "normal verification; no certificate or trust override",
+  "static": [
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "pixelRatio": 2.0,
+      "captures": [
+        {
+          "view": "player",
+          "label": "A：打ち手操作視点",
+          "file": "images/360-player.png",
+          "sha256": "584439a195adcfc51ad2de25b40c322abaa5d968e71fb7cdef91069808770462",
+          "pixels": [
+            652,
+            1164
+          ],
+          "sampledColors": 9796,
+          "layout": {
+            "stageWidth": 328,
+            "stageHeight": 583.109375,
+            "pageWidth": 360,
+            "viewport": 360,
+            "canvasWidth": 652,
+            "canvasHeight": 1162
+          }
+        },
+        {
+          "view": "behind",
+          "label": "B：背後からの肩越し",
+          "file": "images/360-behind.png",
+          "sha256": "822ff0b9f9826822d5a3bd4b587d8c670a96a5b62e1653d9faa09b2acf75a050",
+          "pixels": [
+            652,
+            1164
+          ],
+          "sampledColors": 9717,
+          "layout": {
+            "stageWidth": 328,
+            "stageHeight": 583.109375,
+            "pageWidth": 360,
+            "viewport": 360,
+            "canvasWidth": 652,
+            "canvasHeight": 1162
+          }
+        },
+        {
+          "view": "side",
+          "label": "C：斜め前方の3/4視点",
+          "file": "images/360-side.png",
+          "sha256": "9271136c34cde99fe1bc3bb4ac8143c78d519ee048f8b8ab45c347b80efb5e2b",
+          "pixels": [
+            652,
+            1164
+          ],
+          "sampledColors": 9215,
+          "layout": {
+            "stageWidth": 328,
+            "stageHeight": 583.109375,
+            "pageWidth": 360,
+            "viewport": 360,
+            "canvasWidth": 652,
+            "canvasHeight": 1162
+          }
+        }
+      ],
+      "diagnostics": {
+        "ready": true,
+        "phase": "animated-rig",
+        "model": {
+          "source": "Blender / skinned GLB",
+          "bones": 17,
+          "skinnedMeshes": 28,
+          "triangles": 108352,
+          "animationClips": 0
+        },
+        "diagnostics": {
+          "camera": "side",
+          "triangles": 265712,
+          "drawCalls": 127,
+          "model": {
+            "source": "Blender / skinned GLB",
+            "bones": 17,
+            "skinnedMeshes": 28,
+            "triangles": 108352,
+            "animationClips": 0
+          },
+          "paused": true,
+          "mode": "idle",
+          "time": 0,
+          "pose": {
+            "headYaw": 0.55,
+            "headPitch": 0,
+            "spinePitch": 0,
+            "chestRoll": 0,
+            "rightX": 0.16,
+            "rightY": 0.81,
+            "rightZ": 0.31,
+            "leftX": -0.26,
+            "leftY": 0.81,
+            "leftZ": 0.34,
+            "smile": 0,
+            "open": 0,
+            "frown": 0,
+            "blink": 0,
+            "press": 0,
+            "button": 2
+          },
+          "cabinets": [
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "blue",
+                  "green",
+                  "orange"
+                ],
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "purple",
+                  "rose",
+                  "blue"
+                ],
+                [
+                  "green",
+                  "orange",
+                  "yellow"
+                ],
+                [
+                  "lavender",
+                  "purple",
+                  "rose"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ],
+                [
+                  "orange",
+                  "yellow",
+                  "lavender"
+                ]
+              ],
+              "noticeLampOn": false
+            }
+          ]
+        }
+      },
+      "warnings": [],
+      "errors": [],
+      "failedRequests": []
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "pixelRatio": 2.0,
+      "captures": [
+        {
+          "view": "player",
+          "label": "A：打ち手操作視点",
+          "file": "images/390-player.png",
+          "sha256": "decabf0d1cdf39a6779219e545997be552aa5e17da66eb0dd5514e7c3d91b6f2",
+          "pixels": [
+            668,
+            1190
+          ],
+          "sampledColors": 10037,
+          "layout": {
+            "stageWidth": 335,
+            "stageHeight": 595.546875,
+            "pageWidth": 390,
+            "viewport": 390,
+            "canvasWidth": 666,
+            "canvasHeight": 1188
+          }
+        },
+        {
+          "view": "behind",
+          "label": "B：背後からの肩越し",
+          "file": "images/390-behind.png",
+          "sha256": "dac86ee13aeb3cfc9ec131330d0405860006978da711e5240761f7a23d0328ef",
+          "pixels": [
+            668,
+            1190
+          ],
+          "sampledColors": 9993,
+          "layout": {
+            "stageWidth": 335,
+            "stageHeight": 595.546875,
+            "pageWidth": 390,
+            "viewport": 390,
+            "canvasWidth": 666,
+            "canvasHeight": 1188
+          }
+        },
+        {
+          "view": "side",
+          "label": "C：斜め前方の3/4視点",
+          "file": "images/390-side.png",
+          "sha256": "169a1f5e5022485db738307d280fb6fda5b3c8241540a4355c25750766ac1e44",
+          "pixels": [
+            668,
+            1190
+          ],
+          "sampledColors": 9465,
+          "layout": {
+            "stageWidth": 335,
+            "stageHeight": 595.546875,
+            "pageWidth": 390,
+            "viewport": 390,
+            "canvasWidth": 666,
+            "canvasHeight": 1188
+          }
+        }
+      ],
+      "diagnostics": {
+        "ready": true,
+        "phase": "animated-rig",
+        "model": {
+          "source": "Blender / skinned GLB",
+          "bones": 17,
+          "skinnedMeshes": 28,
+          "triangles": 108352,
+          "animationClips": 0
+        },
+        "diagnostics": {
+          "camera": "side",
+          "triangles": 265712,
+          "drawCalls": 127,
+          "model": {
+            "source": "Blender / skinned GLB",
+            "bones": 17,
+            "skinnedMeshes": 28,
+            "triangles": 108352,
+            "animationClips": 0
+          },
+          "paused": true,
+          "mode": "idle",
+          "time": 0,
+          "pose": {
+            "headYaw": 0.55,
+            "headPitch": 0,
+            "spinePitch": 0,
+            "chestRoll": 0,
+            "rightX": 0.16,
+            "rightY": 0.81,
+            "rightZ": 0.31,
+            "leftX": -0.26,
+            "leftY": 0.81,
+            "leftZ": 0.34,
+            "smile": 0,
+            "open": 0,
+            "frown": 0,
+            "blink": 0,
+            "press": 0,
+            "button": 2
+          },
+          "cabinets": [
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "blue",
+                  "green",
+                  "orange"
+                ],
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "purple",
+                  "rose",
+                  "blue"
+                ],
+                [
+                  "green",
+                  "orange",
+                  "yellow"
+                ],
+                [
+                  "lavender",
+                  "purple",
+                  "rose"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ],
+                [
+                  "orange",
+                  "yellow",
+                  "lavender"
+                ]
+              ],
+              "noticeLampOn": false
+            }
+          ]
+        }
+      },
+      "warnings": [],
+      "errors": [],
+      "failedRequests": []
+    }
+  ],
+  "motion": {
+    "viewport": [
+      390,
+      844
+    ],
+    "pixelRatio": 1.0,
+    "motion": "passed",
+    "pauseResume": "passed",
+    "glasses": "passed",
+    "touch": "passed",
+    "poses": {
+      "look": {
+        "headYaw": -0.5598764122680642,
+        "headPitch": 0.024996641712726933,
+        "spinePitch": 0.0022696726156184815,
+        "chestRoll": 0,
+        "rightX": 0.15999997650002867,
+        "rightY": 0.7950020208271873,
+        "rightZ": 0.35999261833680407,
+        "leftX": -0.25999998531251794,
+        "leftY": 0.81,
+        "leftZ": 0.33999999735625325,
+        "smile": 0,
+        "open": 0,
+        "frown": 0,
+        "blink": 0,
+        "press": 7.414353022858338e-05,
+        "button": 2
+      },
+      "sad": {
+        "headYaw": 0.3998091744198395,
+        "headPitch": -0.22994930609662673,
+        "spinePitch": -0.07277140129069713,
+        "chestRoll": -0.024995029944018796,
+        "rightX": 0.15999999999532816,
+        "rightY": 0.7350119285360999,
+        "rightZ": 0.4199880703981539,
+        "leftX": -0.2599999999970801,
+        "leftY": 0.7600099401119624,
+        "leftZ": 0.39998807186511953,
+        "smile": 0,
+        "open": 0,
+        "frown": 0.8798250540294615,
+        "blink": 0,
+        "press": 1.4739899835218784e-08,
+        "button": 2
+      },
+      "pretend": {
+        "headYaw": 0.32001826512939435,
+        "headPitch": -0.04504232750221761,
+        "spinePitch": -0.022820628718451703,
+        "chestRoll": -5.720363096858477e-06,
+        "rightX": 0.1596192537856554,
+        "rightY": 0.8100793739939618,
+        "rightZ": 0.30346583993645265,
+        "leftX": -0.25976203361603467,
+        "leftY": 0.8099885592738063,
+        "leftZ": 0.3399708949223187,
+        "smile": 0.05998626839869445,
+        "open": 0,
+        "frown": 0.18016016197709278,
+        "blink": 0,
+        "press": 0.7327807659285493,
+        "button": 2
+      }
+    },
+    "initialDiagnostics": {
+      "ready": true,
+      "phase": "animated-rig",
+      "model": {
+        "source": "Blender / skinned GLB",
+        "bones": 17,
+        "skinnedMeshes": 28,
+        "triangles": 108352,
+        "animationClips": 0
+      },
+      "diagnostics": {
+        "camera": "side",
+        "triangles": 265712,
+        "drawCalls": 127,
+        "model": {
+          "source": "Blender / skinned GLB",
+          "bones": 17,
+          "skinnedMeshes": 28,
+          "triangles": 108352,
+          "animationClips": 0
+        },
+        "paused": true,
+        "mode": "idle",
+        "time": 0,
+        "pose": {
+          "headYaw": 0.55,
+          "headPitch": 0,
+          "spinePitch": 0,
+          "chestRoll": 0,
+          "rightX": 0.16,
+          "rightY": 0.81,
+          "rightZ": 0.31,
+          "leftX": -0.26,
+          "leftY": 0.81,
+          "leftZ": 0.34,
+          "smile": 0,
+          "open": 0,
+          "frown": 0,
+          "blink": 0,
+          "press": 0,
+          "button": 2
+        },
+        "cabinets": [
+          {
+            "phase": "normal",
+            "reels": [
+              [
+                "blue",
+                "green",
+                "orange"
+              ],
+              [
+                "yellow",
+                "lavender",
+                "purple"
+              ],
+              [
+                "rose",
+                "blue",
+                "green"
+              ]
+            ],
+            "noticeLampOn": false
+          },
+          {
+            "phase": "normal",
+            "reels": [
+              [
+                "purple",
+                "rose",
+                "blue"
+              ],
+              [
+                "green",
+                "orange",
+                "yellow"
+              ],
+              [
+                "lavender",
+                "purple",
+                "rose"
+              ]
+            ],
+            "noticeLampOn": false
+          },
+          {
+            "phase": "normal",
+            "reels": [
+              [
+                "yellow",
+                "lavender",
+                "purple"
+              ],
+              [
+                "rose",
+                "blue",
+                "green"
+              ],
+              [
+                "orange",
+                "yellow",
+                "lavender"
+              ]
+            ],
+            "noticeLampOn": false
+          }
+        ]
+      }
+    },
+    "errors": [],
+    "warnings": []
+  },
+  "execution": {
+    "renderer": "Headless Chromium using ANGLE SwiftShader software WebGL",
+    "staticCommand": "python tests/visual-review.py --phase static --device-scale-factor 2 --output-dir review --interface",
+    "motionCommand": "python tests/visual-review.py --phase motion --device-scale-factor 1 --output-dir review",
+    "staticPixelRatio": 2,
+    "motionPixelRatio": 1,
+    "order": "Independent static run completed before the independent motion run; no concurrent browsers",
+    "realPhonePerformanceMeasured": false
+  },
+  "browserSmoke": {
+    "command": "python tests/browser-smoke.py",
+    "status": "passed",
+    "pixelRatio": 1,
+    "viewports": [
+      [
+        360,
+        800
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        1280,
+        900
+      ]
+    ],
+    "checks": [
+      "three distinct cameras",
+      "touch controls at least 44 CSS pixels high",
+      "9:16 stage without horizontal overflow",
+      "pause and resume",
+      "glasses toggle",
+      "action controls and demo",
+      "notification, seven entry, bonus play, normal restoration at 390px"
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "bonusImages": [
+      "images/390-bonus-notified.png",
+      "images/390-bonus-aligned.png"
+    ]
+  },
+  "pagesSubpath": {
+    "status": "passed",
+    "path": "/PachiAruCG/",
+    "viewport": [
+      390,
+      844
+    ],
+    "pixelRatio": 1,
+    "camera": "side",
+    "image": "images/390-pages-subpath-side.png",
+    "layout": {
+      "stageWidth": 335,
+      "stageHeight": 595.546875,
+      "pageWidth": 390,
+      "viewport": 390,
+      "canvasWidth": 333,
+      "canvasHeight": 594
+    },
+    "frame": {
+      "pixels": [
+        334,
+        595
+      ],
+      "sampledColors": 9586
+    },
+    "responses": [
+      {
+        "path": "/PachiAruCG/",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/style.css",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/app.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/vendor/three/addons/environments/RoomEnvironment.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/scene/character.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/slot-timeline.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/scene/room.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/scene/cabinet.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/scene/motion.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/camera-views.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/slot-state.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/vendor/three/addons/geometries/RoundedBoxGeometry.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/vendor/three/addons/loaders/GLTFLoader.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/scene/geometry.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/vendor/three/addons/utils/BufferGeometryUtils.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/vendor/three/three.module.js",
+        "status": 200
+      },
+      {
+        "path": "/PachiAruCG/assets/character.glb",
+        "status": 200
+      }
+    ],
+    "errors": [],
+    "failedRequests": [],
+    "model": {
+      "source": "Blender / skinned GLB",
+      "bones": 17,
+      "skinnedMeshes": 28,
+      "triangles": 108352,
+      "animationClips": 0
+    },
+    "tls": "normal verification; no certificate or trust overrides"
+  },
+  "unsuccessfulAttempts": [
+    {
+      "command": "python tests/visual-review.py --phase all --output-dir review --interface",
+      "phase": "motion",
+      "pixelRatio": 2,
+      "result": "timeout",
+      "check": "window.__PACHI_REVIEW__.diagnostics.time >= 1",
+      "timeoutMs": 30000,
+      "context": "The headless SwiftShader software-rendering run did not reach the required animation time within the wait. This DPR2 motion attempt did not pass.",
+      "followUp": "Fresh static-only DPR2 captures and a separate motion-only DPR1 run both completed successfully; their results are recorded separately above."
+    }
+  ],
+  "visualInspection": {
+    "method": "Inspected the actual saved browser screenshots at both mobile viewport sizes and settled motion states.",
+    "static": "A: full cabinet and controls visible. B: head, shoulders, arms, chair and cabinet visible, with the main reels unobscured. C: eyes, mouth, operating arms and cabinet depth visible. No obvious clipping or body/chair/cabinet penetration in these captures.",
+    "motion": "Look turns the head away; sad lowers the head and changes the mouth; pretend changes the operating hand pose. No obvious broken wrist/cuff, knee, seat or shoe connections in the inspected paused frames.",
+    "glasses": "Glasses visibly attach to and detach from the same head; the static study view makes the frame shape readable.",
+    "bonus": "The notification capture shows gold LCD art with scattered rectangles; the entry capture shows the three center sevens."
+  }
+}
