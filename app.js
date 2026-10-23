@@ -1,4 +1,7 @@
 import * as THREE from 'three';
+import { createSlotState, getSlotPresentation, SLOT_TYPES, SYMBOL_COLORS } from './slot-state.js';
+import { getMachineStates } from './slot-timeline.js';
+import { applyCameraView, DEFAULT_CAMERA_VIEW } from './camera-views.js';
 
 // PachiAruCG prototype 01. All devices, cabinet art and symbols are fictional.
 const stage = document.getElementById('stage');
@@ -10,6 +13,11 @@ const actionButtons = [...document.querySelectorAll('[data-action]')];
 const demoButton = document.getElementById('demo');
 const pauseButton = document.getElementById('pause');
 const glassesInput = document.getElementById('glasses');
+const cameraButtons = [...document.querySelectorAll('[data-camera]')];
+const cameraStatus = document.getElementById('camera-status');
+const machineStatus = document.getElementById('machine-status');
+const phaseLabels={normal:'通常', 'bonus-established':'ボーナス成立（未告知）',
+  'bonus-notified':'ボーナス告知（7未入賞）', 'bonus-aligned':'7図柄入賞', 'bonus-play':'ボーナス消化'};
 
 let renderer;
 try {
@@ -28,8 +36,16 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x1a1c31);
 scene.fog = new THREE.Fog(0x202336, 10, 24);
 const camera = new THREE.PerspectiveCamera(35, 9 / 16, 0.1, 50);
-camera.position.set(3.3, 2.85, 8.05);
-camera.lookAt(0.30, 1.60, -0.18);
+let cameraView = DEFAULT_CAMERA_VIEW;
+function switchCamera(viewId) {
+  const view = applyCameraView(camera, viewId);
+  cameraView = viewId;
+  for (const button of cameraButtons) {
+    button.setAttribute('aria-pressed', String(button.dataset.camera === viewId));
+  }
+  cameraStatus.textContent = view.label;
+}
+switchCamera(DEFAULT_CAMERA_VIEW);
 scene.add(new THREE.HemisphereLight(0xe5edff, 0x4b3b4e, 2.1));
 const key = new THREE.DirectionalLight(0xffefd9, 2.1);
 key.position.set(-3.5, 6.0, 5.0);
@@ -131,9 +147,8 @@ function sevenTexture(){
   return t;
 }
 const sevenMap=sevenTexture();
-const symbolColors=[0x3d98db,0xa43dbe,0xebbb44,0x2fb686,0xdd656a,0x7891cd,0xf38f47];
 const slotBoxes=[];
-function createSlot(x, theme, ledColor){
+function createSlot(x, theme, ledColor, initialState){
   const root=new THREE.Group();root.position.set(x,0,-.97);scene.add(root);
   box(root,1.35,3.13,.73,0,1.56,0,metal);
   box(root,1.40,.22,.80,0,3.03,0,trim);
@@ -149,7 +164,7 @@ function createSlot(x, theme, ledColor){
   for(let col=0;col<3;col++){
     const colMeshes=[];
     for(let row=0;row<3;row++){
-      const color = symbolColors[(col*2+row*3+(x>1?1:0))%symbolColors.length];
+      const color = SYMBOL_COLORS[initialState.reels[col][row]];
       const sym=box(root,.295,.195,.023,(col-1)*.37,1.60-row*.225,.433,new THREE.MeshBasicMaterial({color}));
       const number = new THREE.Mesh(new THREE.PlaneGeometry(.25,.19),new THREE.MeshBasicMaterial({map:sevenMap,transparent:true,depthWrite:false}));
       number.position.set((col-1)*.37,1.60-row*.225,.451);
@@ -168,26 +183,35 @@ function createSlot(x, theme, ledColor){
   box(root,.052,2.58,.05,.66,1.62,.43,ledMat);
   box(root,1.33,.055,.04,0,2.84,.43,ledMat);
   const indicator=[];
-  for(let i=0;i<3;i++)indicator.push(box(root,.10,.047,.013,-.2+i*.2,3.035,.454,new THREE.MeshBasicMaterial({color:0x3a9b75})));
+  // Original geometric notice lamps, separate from the always-on cabinet trim.
+  for(let i=0;i<3;i++)indicator.push(box(root,.10,.047,.013,-.2+i*.2,3.035,.454,new THREE.MeshBasicMaterial({color:0x151922})));
   box(root,1.18,.28,.12,0,.33,.425,mat(0x101720));
-  let won=false;
+  let lastPhase=null;
   return {
-    setWin(value){
-      if(value===won)return;
-      won=value;
-      screenMaterial.map=value?winMap:baseMap;
+    setState(state){
+      if(state.phase===lastPhase)return;
+      const view=getSlotPresentation(state);
+      lastPhase=state.phase;
+      screenMaterial.map=view.winningScreen?winMap:baseMap;
       screenMaterial.needsUpdate=true;
       for(let col=0;col<3;col++){
-        symbolSets[col][1].number.visible=value;
-        symbolSets[col][1].sym.material.color.setHex(value?0xffe2a5:symbolColors[(col*2+3+(x>1?1:0))%symbolColors.length]);
+        for(let row=0;row<3;row++){
+          const symbol=view.reels[col][row];
+          const mesh=symbolSets[col][row];
+          mesh.number.visible=symbol==='seven';
+          mesh.sym.material.color.setHex(symbol==='seven'?0xffe2a5:SYMBOL_COLORS[symbol]);
+        }
       }
-      for(const light of indicator)light.material.color.setHex(value?0xffdc76:0x3a9b75);
+      for(const light of indicator)light.material.color.setHex(view.noticeLampOn?0xffdc76:0x151922);
     }
   };
 }
-slotBoxes.push(createSlot(-1.08,'forest',0x5468b7));
-slotBoxes.push(createSlot(.43,'night',0x9a3b88));
-slotBoxes.push(createSlot(1.94,'cosmos',0x614d9c));
+[-1.08,.43,1.94].forEach((x,seed)=>{
+  const state=createSlotState(SLOT_TYPES.TROPICAL,seed);
+  const slot=createSlot(x,'night',0x5468b7,state);
+  slot.setState(state);
+  slotBoxes.push(slot);
+});
 
 function curvedMouth(group, happy, material){
   const pts=[];
@@ -202,7 +226,7 @@ function curvedMouth(group, happy, material){
 }
 
 function createCharacter(){
-  const root=new THREE.Group();root.position.set(-.73,0,1.34);root.rotation.y=.75;scene.add(root);
+  const root=new THREE.Group();root.position.set(.43,0,1.34);root.rotation.y=Math.PI;scene.add(root);
   const skin=mat(0xecc4a4,.92);
   const shirt=mat(0xefedf0,.95);
   const pant=mat(0x26364e,.88);
@@ -265,9 +289,19 @@ function createCharacter(){
   return {root,torso,head,eyes,neutral,happy,frown,open,glasses,shoulders};
 }
 const person=createCharacter();
+const playerEye = new THREE.Vector3(0, .085, .72);
+const playerLookTarget = new THREE.Vector3(0, -.58, 1.93);
+const cameraPoint = new THREE.Vector3();
+function updatePlayerCamera() {
+  if (cameraView !== 'player') return;
+  // Follow the same animated rig when the player glances or slumps, staying
+  // just ahead of the face instead of letting a fixed camera enter the head.
+  camera.position.copy(person.head.localToWorld(cameraPoint.copy(playerEye)));
+  camera.lookAt(person.head.localToWorld(cameraPoint.copy(playerLookTarget)));
+}
 // Placeholder for the adjacent strangers; they never congratulate the protagonist.
 function makeNeighbor(x,shirtColor){
-  const group=new THREE.Group();group.position.set(x,0,1.08);group.rotation.y=.04;
+  const group=new THREE.Group();group.position.set(x,0,1.08);group.rotation.y=Math.PI;
   const skin=mat(0xebc1a1),clothes=mat(shirtColor);
   sphere(group,.50,0,1.5,0,clothes,[.9,1.10,.67]);
   sphere(group,.53,0,2.38,0,skin);
@@ -276,7 +310,7 @@ function makeNeighbor(x,shirtColor){
   scene.add(group);
   return group;
 }
-const neighbor = makeNeighbor(2.37,0x465a6d);
+const neighbor = makeNeighbor(1.94,0x465a6d);
 
 const poses={
   idle:{head:0,chin:0,lean:0,eye:1,tilt:0,open:0,smile:0,sad:0,reach:.15,raise:0},
@@ -302,8 +336,8 @@ function lerpPose(a,b,f){const o={};for(const k in a)o[k]=THREE.MathUtils.lerp(a
 function scenarioPose(t){
   const frames=[
     [0,poses.play],
-    [1.9,poses.play],
-    [2.3,poses.shock],
+    [2.35,poses.play],
+    [2.75,poses.shock],
     [3.15,poses.look],
     [4.2,poses.sad],
     [5.25,poses.pretend],
@@ -322,14 +356,14 @@ function updateFaceAndBody(p,dt){
   const f=poseNow;
   const blinkPhase=totalTime%4.0;
   const blink=blinkPhase>3.50&&blinkPhase<3.65 ? 1-(Math.sin(Math.PI*(blinkPhase-3.50)/.15)*.93) : 1;
-  person.head.rotation.y=f.head;
+  person.head.rotation.y=-f.head;
   person.head.rotation.x=-f.chin;
   person.torso.rotation.x=-f.lean;
   for(let i=0;i<2;i++){
     const eye=person.eyes[i],side=i===0?-1:1;
     eye.scale.y=Math.max(.07,1.21*f.eye*blink);
     eye.rotation.z=side*f.tilt;
-    eye.position.x=side*.223+f.head*.016;
+    eye.position.x=side*.223-f.head*.016;
   }
   person.neutral.material.opacity=Math.max(0,1-f.open*1.6-f.smile-f.sad);
   person.happy.material.opacity=Math.max(0,f.smile*(1-f.open*.45));
@@ -343,14 +377,13 @@ function updateFaceAndBody(p,dt){
     arm.el.rotation.x=-.23+f.reach*.40;
   }
   person.root.position.y=Math.sin(totalTime*1.4)*.005;
-  neighbor.rotation.y=.04+Math.sin(totalTime*.4)*.008;
+  neighbor.rotation.y=Math.PI+Math.sin(totalTime*.4)*.008;
 }
 function updateMachines(){
-  const active=mode==='demo' ? (sceneTime>2.05&&sceneTime<6.65) : ['look','shock','sad','angry','pretend'].includes(mode);
-  const characterWin=mode==='smile';
-  slotBoxes[0].setWin(false);
-  slotBoxes[1].setWin(characterWin);
-  slotBoxes[2].setWin(active);
+  const states=getMachineStates(mode,sceneTime);
+  states.forEach((state,index)=>slotBoxes[index].setState(state));
+  const text='本人の台：'+phaseLabels[states[1].phase]+' ／ 隣の台：'+phaseLabels[states[2].phase];
+  if(machineStatus.textContent!==text)machineStatus.textContent=text;
 }
 function resize(){
   const w=stage.clientWidth, h=stage.clientHeight;
@@ -362,6 +395,7 @@ function resize(){
 new ResizeObserver(resize).observe(stage);
 window.addEventListener('orientationchange',resize);
 for(const b of actionButtons)b.addEventListener('click',()=>switchMode(b.dataset.action));
+for(const button of cameraButtons)button.addEventListener('click',()=>switchCamera(button.dataset.camera));
 demoButton.addEventListener('click',()=>switchMode('demo'));
 pauseButton.addEventListener('click',()=>{
   paused=!paused;
@@ -378,6 +412,7 @@ function animate(){
   if(mode==='demo'&&sceneTime>7.3)sceneTime=0;
   const target=mode==='demo'?scenarioPose(sceneTime):poses[mode];
   updateFaceAndBody(target,paused?0:delta);
+  updatePlayerCamera();
   updateMachines();
   renderer.render(scene,camera);
   if(loading.style.display!=='none'){

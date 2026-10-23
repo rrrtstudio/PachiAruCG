@@ -32,6 +32,16 @@
       <p class="preview-note">説明用の文字や実在機種のロゴは映像に入れていません。左右の台は縦画面から一部見切れる構図です。</p>
     </section>
     <section class="panel" aria-label="キャラクター操作">
+      <section class="camera-setting" aria-label="カメラ切り替え">
+        <h2>カメラ</h2>
+        <div class="camera-controls" role="group" aria-label="撮影する視点">
+          <button type="button" data-camera="player" aria-pressed="false">打ち手視点</button>
+          <button type="button" data-camera="behind" aria-pressed="false">背後視点</button>
+          <button type="button" data-camera="side" aria-pressed="true">横からの視点</button>
+        </div>
+        <p class="camera-status">表示中：<span id="camera-status" aria-live="polite">横からの視点</span></p>
+      </section>
+      <div class="line"></div>
       <div class="eyebrow">MOTION CONTROLLER</div>
       <h2>動きを選ぶ</h2>
       <div id="actions" class="controls" role="group" aria-label="個別の動作">
@@ -53,12 +63,13 @@
       <div class="line"></div>
       <div class="scenario">
         <h2>一連の動作テスト</h2>
-        <p>普通に打つ → 隣で大当たり → 横目で見る → 落胆 → 何事もなかったように打ち直す</p>
+        <p>普通に打つ → 隣のボーナス告知 → 7図柄入賞 → 横目で見る → 落胆 → 打ち直す</p>
         <div class="transport">
           <button class="primary" type="button" id="demo">▶ 一連の動作を再生</button>
           <button class="secondary" type="button" id="pause">一時停止</button>
         </div>
         <p class="status" id="status" role="status" aria-live="polite">読込中</p>
+        <p class="status" id="machine-status" role="status" aria-live="polite">本人の台：通常 ／ 隣の台：通常</p>
       </div>
       <div class="line"></div>
       <section class="spec">
@@ -68,7 +79,9 @@
           <li>メガネの着脱だけで別キャラにしない</li>
           <li>首・肩・腕・まばたき・口を連続して動かす</li>
           <li>隣の客は基本的に赤の他人・無関心</li>
-          <li>台は完全架空。通常は色付き長方形、当たりは7図柄</li>
+          <li>台は完全架空。通常は色付き長方形で横一列を揃えない</li>
+          <li>ボーナス成立・告知と7図柄入賞は別の段階</li>
+          <li>非当選時の告知ランプは消灯</li>
         </ul>
       </section>
     </section>
