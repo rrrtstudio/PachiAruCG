@@ -1,0 +1,11 @@
+{
+  "name": "pachiaru-cg",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check app.js && node --check slot-state.js && node --check slot-timeline.js && node --check camera-views.js"
+  },
+  "engines": { "node": ">=22" }
+}
