@@ -4,6 +4,7 @@ import { createCabinet } from './scene/cabinet.js';
 import { loadCharacter } from './scene/character.js';
 import { createRoom } from './scene/room.js';
 import { getMachineStates } from './slot-timeline.js';
+import { sampleMotion, dampMotion } from './scene/motion.js';
 import { applyCameraView, DEFAULT_CAMERA_VIEW, CAMERA_VIEWS } from './camera-views.js';
 
 const stage = document.getElementById('stage');
@@ -17,13 +18,15 @@ const actionButtons = [...document.querySelectorAll('[data-action]')];
 const params = new URLSearchParams(location.search);
 let cameraView = Object.hasOwn(CAMERA_VIEWS, params.get('camera')) ? params.get('camera') : DEFAULT_CAMERA_VIEW;
 let paused = true, mode = 'idle', time = 0, speed = 1, dirty = true;
+let pose = sampleMotion('idle', 0), shadowTime = -1;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
-renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+renderer.setPixelRatio(Math.min(devicePixelRatio || 1, params.get('review') === '1' ? 2 : 1.5));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.12;
+renderer.toneMappingExposure = 1.06;
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.shadowMap.autoUpdate = false; renderer.shadowMap.needsUpdate = true;
 stage.insertBefore(renderer.domElement, loading);
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x696057);
@@ -32,16 +35,16 @@ const camera = new THREE.PerspectiveCamera(42, 9 / 16, .025, 30);
 const environment = new RoomEnvironment();
 const pmrem = new THREE.PMREMGenerator(renderer);
 scene.environment = pmrem.fromScene(environment, .04).texture;
-scene.environmentIntensity = .55;
+scene.environmentIntensity = .42;
 environment.dispose(); pmrem.dispose();
-scene.add(new THREE.HemisphereLight(0xffeed9, 0x5b5051, 1.3));
-const key = new THREE.DirectionalLight(0xffe3c2, 3.2);
+scene.add(new THREE.HemisphereLight(0xf6f0e8, 0x5b5051, .78));
+const key = new THREE.DirectionalLight(0xfff3e6, 2.6);
 key.position.set(-2.5, 4.5, 2.7); key.castShadow = true;
 key.shadow.mapSize.set(1024, 1024); key.shadow.camera.left = -2.5; key.shadow.camera.right = 2.5;
 key.shadow.camera.top = 3; key.shadow.camera.bottom = -1.5;
 key.shadow.bias = -.0005; key.shadow.normalBias = .012; key.shadow.radius = 3;
 key.target.position.set(0, .8, .3); scene.add(key, key.target);
-const fill = new THREE.DirectionalLight(0xe6edfa, .9); fill.position.set(2.5, 2.2, -1); scene.add(fill);
+const fill = new THREE.DirectionalLight(0xe6edfa, .48); fill.position.set(2.5, 2.2, -1); scene.add(fill);
 const room = createRoom(scene);
 const cabinets = [-.82, 0, .82].map((x, seed) => {
   const cabinet = createCabinet({ seed, detail: seed === 1 });
@@ -55,7 +58,7 @@ const phaseLabels = { normal: '通常', 'bonus-established': 'ボーナス成立
 let person;
 function setCamera(view) {
   cameraView = view; applyCameraView(camera, view);
-  dirty = true;
+  dirty = true; renderer.shadowMap.needsUpdate = true;
   if (person) person.setView(view, glassesInput.checked);
   room.chair.visible = view !== 'player';
   for (const button of cameraButtons) button.setAttribute('aria-pressed', String(button.dataset.camera === view));
@@ -86,13 +89,13 @@ setCamera(cameraView); resize(); refreshStatus();
 try {
   person = await loadCharacter(); scene.add(person.root);
   person.studyPose(); setCamera(cameraView);
-  // Hold the sculpted seated pose for the first image review, before animation.
+  // Start with the same sculpted pose for the three comparison shots.
   updateMachines(); renderer.render(scene, camera);
   loading.style.display = 'none';
   window.__PACHI_REVIEW__ = {
-    ready: true, phase: 'static', model: person.stats,
+    ready: true, phase: 'animated-rig', model: person.stats,
     get diagnostics() { return { camera: cameraView, triangles: renderer.info.render.triangles,
-      drawCalls: renderer.info.render.calls, model: person.stats, paused, mode, time,
+      drawCalls: renderer.info.render.calls, model: person.stats, paused, mode, time, pose,
       cabinets: cabinets.map(cabinet => cabinet.root.userData) }; }
   };
 } catch (error) {
@@ -103,6 +106,11 @@ try {
 for (const button of cameraButtons) button.addEventListener('click', () => setCamera(button.dataset.camera));
 for (const button of actionButtons) button.addEventListener('click', () => setMode(button.dataset.action));
 document.getElementById('demo').addEventListener('click', () => setMode('demo'));
+document.getElementById('study').addEventListener('click', () => {
+  paused = true; mode = 'idle'; time = 0; pose = sampleMotion('idle', 0);
+  person.studyPose(); cabinets[1].buttons.forEach(button => { button.position.z = .192; });
+  dirty = true; renderer.shadowMap.needsUpdate = true; refreshStatus();
+});
 pauseButton.addEventListener('click', () => { paused = !paused; refreshStatus(); });
 glassesInput.addEventListener('change', () => {
   person.setView(cameraView, glassesInput.checked);
@@ -112,14 +120,27 @@ speedSlider.addEventListener('input', () => {
   speed = Number(speedSlider.value); document.getElementById('speed-value').textContent = speed.toFixed(1) + '×';
 });
 const clock = new THREE.Clock();
-function render() {
+let lastFrame = -1;
+function render(timestamp = 0) {
   requestAnimationFrame(render);
+  // Keep animation at 30 fps; paused views render only when something changes.
+  if (!dirty && timestamp - lastFrame < 1000 / 30) return;
   const dt = Math.min(clock.getDelta(), .05);
-  if (!paused) { time += dt * speed; if (mode === 'demo' && time > 7.3) time = 0; }
+  if (!paused) {
+    time += dt * speed; if (mode === 'demo' && time > 7.3) time = 0;
+    const target = sampleMotion(mode, time);
+    pose = dampMotion(pose, target, dt * speed);
+    pose.blink = target.blink;
+    person.applyPose(pose);
+    cabinets[1].buttons.forEach((button, index) => {
+      button.position.z = .192 - (index === Math.round(pose.button) ? pose.press * .004 : 0);
+    });
+    if (time - shadowTime > .12 || time < shadowTime) { renderer.shadowMap.needsUpdate = true; shadowTime = time; }
+  }
   // A paused model needs a new frame only after a camera, accessory or size
   // change. Do not continuously redraw the same shadowed GLB on a phone.
   if (!paused || dirty) {
-    updateMachines(); renderer.render(scene, camera); dirty = false;
+    updateMachines(); renderer.render(scene, camera); dirty = false; lastFrame = timestamp;
   }
 }
 render();

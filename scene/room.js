@@ -53,6 +53,12 @@ export function createRoom(scene) {
   ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; group.add(ground);
   const wall = material(0xa69e94, .94), dark = material(0x353238, .8), soffit = material(0x7e7770, .9);
   rounded(group, [10, 2.8, .12], [0, 1.4, -1.15], wall);
+  // The far aisle wall gives the side shot depth instead of a blank fog field.
+  rounded(group, [.12, 2.8, 6], [3.7, 1.4, 1.5], material(0xa69e94, .94));
+  for (let z = -1; z < 4; z += .65) {
+    rounded(group, [.018, 2.24, .018], [3.63, 1.12, z], material(0x8c8479), .004);
+  }
+  rounded(group, [.026, .075, 6], [3.62, .16, 1.5], material(0x716960), .004);
   rounded(group, [10, .22, .68], [0, 2.16, -.56], dark);
   rounded(group, [10, .08, .82], [0, 1.92, -.48], soffit);
   rounded(group, [10, .07, 8], [0, 2.65, 1], material(0x948b80, .95));

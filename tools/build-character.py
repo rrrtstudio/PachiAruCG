@@ -229,9 +229,10 @@ head=loft('HeadSurface',[
     ((0,1.075,.71),.045,.045),((0,1.09,.705),.10,.108),
     ((0,1.12,.705),.15,.15),((0,1.18,.711),.198,.187),
     ((0,1.25,.72),.224,.209),((0,1.33,.735),.227,.212),
-    ((0,1.405,.745),.207,.194),((0,1.47,.750),.165,.155),
-    ((0,1.52,.750),.103,.098),((0,1.548,.748),.028,.027),
-    ((0,1.55,.748),.003,.003)
+    ((0,1.405,.745),.212,.199),((0,1.455,.748),.195,.183),
+    ((0,1.495,.749),.164,.154),((0,1.522,.749),.125,.118),
+    ((0,1.539,.749),.082,.077),((0,1.548,.749),.041,.039),
+    ((0,1.551,.749),.008,.008)
 ],skin,64)
 bpy.context.view_layer.objects.active=head
 sub=head.modifiers.new('Sculpt subdivision','SUBSURF');sub.levels=2
@@ -243,7 +244,7 @@ neck=ellipsoid('NeckSurface',(0,1.055,.72),(.071,.091,.067),skin)
 facial=[]
 for side,suffix in [(-1,'L'),(1,'R')]:
     center=(side*.079,1.326,.529)
-    eye=ellipsoid('Eye_'+suffix,center,(.014,.026,.008),eye_mat,32,20)
+    eye=ellipsoid('Eye_'+suffix,center,(.017,.031,.0085),eye_mat,32,20)
     eye.shape_key_add(name='Basis')
     key=eye.shape_key_add(name='Blink')
     for vertex in key.data:
@@ -259,9 +260,11 @@ for ri in range(1,rings+1):
     r=ri/rings
     for j in range(sides):
         theta=j*2*math.pi/sides
-        x=math.cos(theta)*.035*r
-        y=1.204+math.sin(theta)*.0045*r
-        mouth_vertices.append((x,y,.516+x*x*.18))
+        x=math.cos(theta)*.043*r
+        # A restrained, shallow smile remains readable in a portrait shot.
+        # It is a real curved surface and deforms into the expression targets.
+        y=1.204+math.sin(theta)*.005*r+.003*(x/.043)**2
+        mouth_vertices.append((x,y,.516+x*x*1.6))
 for j in range(sides): mouth_faces.append((0,1+j,1+(j+1)%sides))
 for ri in range(1,rings):
     for j in range(sides):
@@ -276,8 +279,8 @@ for name in ['Smile','Open','Frown']:
     for i,vert in enumerate(key.data):
         if i==0: vert.co=p((0,1.198,.513));continue
         ri=(i-1)//sides+1;r=ri/rings;theta=((i-1)%sides)*2*math.pi/sides
-        width=.038 if name=='Smile' else .027 if name=='Open' else .035
-        height=.019 if name=='Smile' else .032 if name=='Open' else .004
+        width=.046 if name=='Smile' else .032 if name=='Open' else .043
+        height=.022 if name=='Smile' else .036 if name=='Open' else .005
         x=math.cos(theta)*width*r
         curve_y=(.012 if name=='Smile' else -.012 if name=='Frown' else 0)*(x/width)**2
         y=1.198+math.sin(theta)*height*r+curve_y
