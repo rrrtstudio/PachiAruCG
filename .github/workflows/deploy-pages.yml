@@ -1,0 +1,113 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      sha:
+        description: The merge commit on main to publish
+        required: true
+        type: string
+
+permissions: {}
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.repository == 'rrrtstudio/PachiAruCG' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      sha: ${{ steps.resolve.outputs.sha }}
+      ready: ${{ steps.fresh.outputs.ready }}
+    steps:
+      - name: Resolve the current main commit
+        id: resolve
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        env:
+          REQUESTED_SHA: ${{ inputs.sha || github.sha }}
+        with:
+          script: |
+            const requested = process.env.REQUESTED_SHA;
+            if (!/^[a-f0-9]{40}$/.test(requested)) {
+              throw new Error('A full commit SHA is required for Pages deployment');
+            }
+            const { data: main } = await github.rest.repos.getBranch({
+              ...context.repo, branch: 'main'
+            });
+            const current = main.commit.sha === requested;
+            core.setOutput('sha', requested);
+            core.setOutput('current', String(current));
+            if (!current) {
+              await core.summary.addRaw('Pages deployment skipped: main has advanced. The newer main run or workflow_dispatch can publish it.').write();
+            }
+      - name: Check out the merged main commit
+        if: steps.resolve.outputs.current == 'true'
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ steps.resolve.outputs.sha }}
+          persist-credentials: false
+      - name: Set up Node
+        if: steps.resolve.outputs.current == 'true'
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+      - name: Check and test main without deployment permissions
+        if: steps.resolve.outputs.current == 'true'
+        run: |
+          npm run check
+          npm test
+      - name: Prepare only the public preview files
+        if: steps.resolve.outputs.current == 'true'
+        run: |
+          mkdir -p _site
+          cp -- index.html style.css app.js camera-views.js slot-state.js slot-timeline.js _site/
+          touch _site/.nojekyll
+      - name: Recheck main before uploading
+        if: steps.resolve.outputs.current == 'true'
+        id: fresh
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        env:
+          BUILT_SHA: ${{ steps.resolve.outputs.sha }}
+        with:
+          script: |
+            const { data: main } = await github.rest.repos.getBranch({
+              ...context.repo, branch: 'main'
+            });
+            const ready = main.commit.sha === process.env.BUILT_SHA;
+            core.setOutput('ready', String(ready));
+            if (!ready) {
+              await core.summary.addRaw('Pages deployment skipped: main advanced during the build.').write();
+            }
+      - name: Upload the Pages artifact
+        if: steps.fresh.outputs.ready == 'true'
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+        with:
+          path: _site
+      - name: Report a build failure
+        if: failure()
+        run: echo 'Pages build failed; no deployment was attempted. Check the failing step above.' >> "$GITHUB_STEP_SUMMARY"
+
+  deploy:
+    needs: build
+    if: needs.build.outputs.ready == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+      - name: Report a deployment failure
+        if: failure()
+        run: echo 'Pages deployment failed. Verify Settings → Pages → Source is GitHub Actions and inspect the deployment log. Branch protection has not been changed.' >> "$GITHUB_STEP_SUMMARY"

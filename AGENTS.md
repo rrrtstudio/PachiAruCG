@@ -54,3 +54,8 @@ Create short, surreal observations of Japanese pachinko / pachislot players. The
 - Fictional machines only; no real names/logos in generated art.
 - No minors anywhere on gambling premises.
 - Strangers do not celebrate together unless specified.
+
+## GitHub delivery
+- Work on a `codex/` branch in this repository and open a non-draft PR targeting `main` when ready. Keep the required `test` job and all existing branch protection rules.
+- The trusted auto-merge workflow verifies the current PR head and latest successful test run, then uses the ordinary GitHub merge API. Never bypass protection, auto-approve reviews, push directly to main, or add an administrator token to make automation pass.
+- Fix reported failures in the PR branch and rerun tests. Pages deployment failures are visible in Actions and can be retried with the `Deploy GitHub Pages` workflow on main.
