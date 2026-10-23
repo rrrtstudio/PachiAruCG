@@ -3,8 +3,9 @@
 
 Run static captures before adding motion:
     python tests/visual-review.py --phase static --output-dir /tmp/pachiarucg-static-review
-Run the final review (screenshots + touch/motion checks):
-    python tests/visual-review.py --phase all --output-dir review
+Run the final review sequentially to limit software-GPU load:
+    python tests/visual-review.py --phase static --device-scale-factor 2 --output-dir review --interface
+    python tests/visual-review.py --phase motion --device-scale-factor 1 --output-dir review
 
 Requires Python Playwright, Pillow, and Chromium. All requests retain normal TLS
 verification. The generated gallery contains browser captures, not scene assets.
@@ -117,6 +118,7 @@ def capture_static(browser, base_url, width, height, output, pixel_ratio=2, sele
 
 def verify_motion(browser, base_url, output, pixel_ratio=2):
     context, page, errors, failures, warnings = open_review(browser, base_url, 390, 844, True, pixel_ratio)
+    initial_diagnostics = page.evaluate("window.__PACHI_REVIEW__")
     canvas = page.locator("#stage canvas")
     page.locator('[data-action="play"]').tap()
     page.wait_for_timeout(300)
@@ -133,22 +135,43 @@ def verify_motion(browser, base_url, output, pixel_ratio=2):
     with_glasses = canvas.screenshot(path=str(output / "images" / "390-glasses.png"))
     assert digest(with_glasses) != digest(still), "The glasses accessory did not render"
     page.locator("#glasses").tap()
+    paused_time = page.evaluate("window.__PACHI_REVIEW__.diagnostics.time")
     page.locator("#pause").tap()
-    page.wait_for_timeout(300)
-    assert digest(canvas.screenshot()) != digest(still), "Animation did not resume"
+    page.wait_for_function("previous => window.__PACHI_REVIEW__.diagnostics.time > previous + .12",
+                           arg=paused_time)
+    assert "再生中" in page.locator("#status").inner_text(), "Animation did not resume"
+    poses = {}
     for action in ("look", "sad", "pretend"):
         page.locator(f'[data-action="{action}"]').tap()
-        page.wait_for_timeout(650)
+        # Allow the damped skeleton to settle in animation time. Software WebGL
+        # can advance fewer frames than a phone GPU during a fixed wall delay.
+        page.wait_for_function("window.__PACHI_REVIEW__.diagnostics.time >= 1")
+        page.locator("#pause").tap()
+        poses[action] = page.evaluate("window.__PACHI_REVIEW__.diagnostics.pose")
         frame = canvas.screenshot(path=str(output / "images" / f"390-motion-{action}.png"))
         frame_stats(frame)
         layout(page)
     page.locator("#speed").fill("1.5")
     assert page.locator("#speed-value").inner_text() == "1.5×"
+    if page.locator("#study").count():
+        page.locator("#study").tap()
+        assert "停止中" in page.locator("#status").inner_text()
+        study = digest(canvas.screenshot())
+        page.wait_for_timeout(250)
+        assert digest(canvas.screenshot()) == study, "The study reset did not hold a static pose"
+        page.locator("#glasses").tap()
+        page.wait_for_timeout(100)
+        glasses_study = canvas.screenshot(path=str(output / "images" / "390-glasses-study.png"))
+        assert digest(glasses_study) != study, "The study glasses did not render"
+        page.locator("#glasses").tap()
     assert not errors, errors
     assert not failures, failures
     context.close()
-    return {"viewport": [390, 844], "motion": "passed", "pauseResume": "passed",
-            "glasses": "passed", "touch": "passed", "errors": errors, "warnings": warnings}
+    return {"viewport": [390, 844], "pixelRatio": pixel_ratio,
+            "motion": "passed", "pauseResume": "passed",
+            "glasses": "passed", "touch": "passed", "poses": poses,
+            "initialDiagnostics": initial_diagnostics,
+            "errors": errors, "warnings": warnings}
 
 
 def write_gallery(output, results):
@@ -200,11 +223,21 @@ def main():
             results = [capture_static(browser, base_url, width, height, args.output_dir,
                                       args.device_scale_factor, selected_views, args.interface)
                        for width, height in viewports] if args.phase != "motion" else []
+            report_path = args.output_dir / "verification.json"
+            if results:
+                # Keep completed static evidence even if the later motion phase
+                # times out on a software-rendering host.
+                write_gallery(args.output_dir, results)
+                report_path.write_text(json.dumps({"phase": "static", "source": "real Chromium WebGL rendering",
+                    "tls": "normal verification; no certificate or trust override", "static": results,
+                    "motion": None}, ensure_ascii=False, indent=2), encoding="utf-8")
+            elif args.phase == "motion" and report_path.exists():
+                results = json.loads(report_path.read_text(encoding="utf-8")).get("static", [])
             motion = verify_motion(browser, base_url, args.output_dir, args.device_scale_factor) if args.phase != "static" else None
             browser.close()
-        if results:
+        if results and args.phase != "motion":
             write_gallery(args.output_dir, results)
-        report = {"phase": args.phase, "source": "real Chromium WebGL rendering",
+        report = {"phase": "all" if results and motion else args.phase, "source": "real Chromium WebGL rendering",
                   "tls": "normal verification; no certificate or trust override", "static": results, "motion": motion}
         (args.output_dir / "verification.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
         print(json.dumps({"phase": args.phase, "viewports": [result["viewport"] for result in results],

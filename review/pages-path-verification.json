@@ -1,0 +1,106 @@
+{
+  "status": "passed",
+  "path": "/PachiAruCG/",
+  "viewport": [
+    390,
+    844
+  ],
+  "pixelRatio": 1,
+  "camera": "side",
+  "image": "images/390-pages-subpath-side.png",
+  "layout": {
+    "stageWidth": 335,
+    "stageHeight": 595.546875,
+    "pageWidth": 390,
+    "viewport": 390,
+    "canvasWidth": 333,
+    "canvasHeight": 594
+  },
+  "frame": {
+    "pixels": [
+      334,
+      595
+    ],
+    "sampledColors": 9586
+  },
+  "responses": [
+    {
+      "path": "/PachiAruCG/",
+      "status": 200
+    },
+    {
+      "path": "/PachiAruCG/style.css",
+      "status": 200
+    },
+    {
+      "path": "/PachiAruCG/app.js",
+      "status": 200
+    },
+    {
+      "path": "/PachiAruCG/vendor/three/addons/environments/RoomEnvironment.js",
+      "status": 200
+    },
+    {
+      "path": "/PachiAruCG/scene/character.js",
+      "status": 200
+    },
+    {
+      "path": "/PachiAruCG/slot-timeline.js",
+      "status": 200
+    },
+    {
+      "path": "/PachiAruCG/scene/room.js",
+      "status": 200
+    },
+    {
+      "path": "/PachiAruCG/scene/cabinet.js",
+      "status": 200
+    },
+    {
+      "path": "/PachiAruCG/scene/motion.js",
+      "status": 200
+    },
+    {
+      "path": "/PachiAruCG/camera-views.js",
+      "status": 200
+    },
+    {
+      "path": "/PachiAruCG/slot-state.js",
+      "status": 200
+    },
+    {
+      "path": "/PachiAruCG/vendor/three/addons/geometries/RoundedBoxGeometry.js",
+      "status": 200
+    },
+    {
+      "path": "/PachiAruCG/vendor/three/addons/loaders/GLTFLoader.js",
+      "status": 200
+    },
+    {
+      "path": "/PachiAruCG/scene/geometry.js",
+      "status": 200
+    },
+    {
+      "path": "/PachiAruCG/vendor/three/addons/utils/BufferGeometryUtils.js",
+      "status": 200
+    },
+    {
+      "path": "/PachiAruCG/vendor/three/three.module.js",
+      "status": 200
+    },
+    {
+      "path": "/PachiAruCG/assets/character.glb",
+      "status": 200
+    }
+  ],
+  "errors": [],
+  "failedRequests": [],
+  "model": {
+    "source": "Blender / skinned GLB",
+    "bones": 17,
+    "skinnedMeshes": 28,
+    "triangles": 108352,
+    "animationClips": 0
+  },
+  "tls": "normal verification; no certificate or trust overrides"
+}

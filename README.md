@@ -3,16 +3,23 @@
 パチンコ・パチスロ打ちの「あるある」を題材にした架空の3DCGショートアニメ制作プロジェクトです。実機や実在店の名称・ロゴは使用しません。
 
 ## 現在の段階
-**Prototype 01 — Character Motion Lab**
+**Visual Study 01 — 人物・筐体の造形レビュー**
 
-- 髪なし・肌色・目と口だけの3Dキャラクター
+- Blenderで制作した、髪なし・肌色・目と口だけのスキン付きGLB人物
+- 自然につながる服・腕・手指・着座した脚と靴
 - 裸眼／メガネ切替
-- 8種類の動作モードと滑らかな表情・首・肩・腕の補間
+- 同じ17ボーンを使った動作、手の到達位置を保つIK、目と口の表情モーフ
 - 「隣が当たり、本人は落胆する」短いシナリオ再生
-- 打ち手視点／背後視点／横からの視点の切り替え（初期表示は横）
+- 台と操作部／背後の肩越し／斜め前の3/4構図（初期表示は3/4）
 - 通常・ボーナス成立・告知・7図柄入賞・ボーナス消化を区別するリール状態
 - 9:16 のスマホ表示、架空の3リール機が同じ島に並ぶ背景
 - 画像の切替ではなく、Three.jsで動作する3Dオブジェクト
+
+最初は同じ静止ポーズで3視点を比較できます。「動きを選ぶ」で再生し、「静止ポーズに戻す」で造形確認へ戻ります。Aは台の全体と操作部を見せるインサートで、人物と椅子は映しません。B・Cでは同じ人物・椅子・台を同時に描画します。周辺は同じ筐体の複製で、人物はまず1人に絞っています。
+
+[3視点と改善前後の実画像](review/README.md) ／ [撮影画像の比較HTML](review/index.html) ／ [元の37ファイルの復旧・保存記録](review/RECOVERY.md)
+
+ビジュアル確認を待つため、今回のPRは `visual/character-study` のドラフトです。自動マージせず、mainと公開済みPagesは更新していません。
 
 ### プレビュー公開（最初の1回）
 GitHub のこのリポジトリを開く → **Settings** → **Pages** → **Build and deployment** → **Deploy from a branch** → `main` / `/(root)` → **Save**。
@@ -29,6 +36,11 @@ GitHub Pagesの有効化操作と公開状態は、リポジトリ管理者が�
 - `index.html` — アプリのHTML構造
 - `style.css` — スマホ向けUI
 - `app.js` — Three.js製3Dシーン、モデル、状態と動作
+- `assets/character.glb` — スキン・骨・表情モーフ付きの人物
+- `tools/build-character.py` — Blender 4.3以降で人物を再生成する制作スクリプト
+- `scene/` — 人物の読み込み・IK・動作曲線、立体筐体、椅子・室内
+- `vendor/three/` — 同梱したThree.js 0.165.0と必要モジュール、MITライセンス、SHA-256
+- `review/` — ブラウザで撮影した比較画像と検証結果。3D描画の素材には使用しない
 - `slot-state.js` — 3×3リール、図柄の許可リスト、ノーマル／告知型の状態遷移
 - `slot-timeline.js` — シナリオと各動作の当選・告知・入賞タイミング
 - `camera-views.js` — 3視点のカメラ設定
@@ -59,7 +71,20 @@ Python PlaywrightとChromiumがある環境では、次のブラウザテスト�
 python tests/browser-smoke.py --chromium /usr/bin/chromium
 ```
 
-360×800・390×844・1280×900で、WebGL描画、9:16、横はみ出し、タッチ操作、3視点、一時停止・再開を確認し、画像を `/tmp/pachiarucg-browser/` に保存します。実際のCDNを通常のTLS検証で読み込みます。証明書エラーが発生した場合はエラーを報告し、ルートCA追加やTLS検証無効化は行わずに検証を止めてください。
+360×800・390×844・1280×900で、WebGL描画、9:16、横はみ出し、タッチ操作、3視点、一時停止・再開を確認し、画像を `/tmp/pachiarucg-browser/` に保存します。同梱した本番用のThree.jsを通常の読み込みで使用します。ルートCA追加やTLS検証無効化は行いません。
+
+造形を変更したら、先に静止6枚を見てから動作を検証します。Python Playwright・Pillow・Chromiumが必要です。
+
+```sh
+python tests/visual-review.py --phase static --output-dir /tmp/pachiarucg-static-review
+python tests/visual-review.py --phase static --output-dir review --interface
+python tests/visual-review.py --phase motion --device-scale-factor 1 --output-dir review
+python tools/build-review-sheets.py
+```
+
+比較用の静止画はピクセル比2、動作確認はピクセル比1で分けて撮影します。この実行環境のソフトウェア描画では、ピクセル比2の動作確認は時間制限に達しました。実機Androidの速度・発熱は別途確認が必要です。
+
+人物の再生成は `blender -b --python tools/build-character.py`。GLBは約3MBです。アニメーションクリップの画像や完成フレームは含めず、読み込んだスキンの骨と表情モーフを実行時に補間します。自動テストは全頂点のウェイト、骨とモーフ、床上の靴、動作曲線の連続性、30/60fpsでの補間一致も確認します。
 
 ### 今後の作業
 1. 主人公のリグ・動作の固定（現在）
@@ -69,4 +94,6 @@ python tests/browser-smoke.py --chromium /usr/bin/chromium
 5. 短尺動画のタイムライン・動画出力機能
 
 ### 技術メモ
-`app.js` は Three.js ES Module をCDNから読み込みます。GitHub PagesなどのHTTP(S)経由で実行してください。オフライン／直接 `file://` で開く場合、ブラウザによっては動作しません。動作確認にはWebGL対応端末とネット接続が必要です。
+Three.js・必要な追加モジュール・GLBは同じサイトから読み込み、CDNには依存しません。筐体の液晶・リールや床のテクスチャはコードで生成します。GitHub PagesなどのHTTP(S)経由で実行してください。直接 `file://` で開く構成ではありません。停止中はカメラ・メガネ・サイズ変更時だけ描画し、動作は30fps上限、通常のスマホ表示はピクセル比1.5を上限にしています。
+
+承認後にPagesへ公開する際は、HTML/JSだけでなく `scene/`・`assets/`・`vendor/` と比較用の `review/` も配信対象に含めます。既存のブランチ公開ではそのまま配置できます。ファイルを選んでartifactへコピーする公開ワークフローを導入する場合も、このディレクトリ構成を保持してください。

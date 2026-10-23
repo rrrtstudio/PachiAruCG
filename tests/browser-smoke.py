@@ -123,7 +123,7 @@ def check_viewport(browser, width, height, output_dir):
         page.wait_for_function("document.querySelector('#machine-status').textContent"
                                ".includes('本人の台：通常 ／ 隣の台：通常')")
     page.locator("#demo").tap()
-    assert "一連の動作テスト" in page.locator("#status").inner_text()
+    assert "一連の動作" in page.locator("#status").inner_text()
     assert_layout(page)
     assert not failures, failures
     assert not errors, errors

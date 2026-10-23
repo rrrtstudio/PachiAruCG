@@ -28,7 +28,7 @@ function pose(mode, time) {
     out.leftZ = .34 - leftReach * (.018 + out.press * .009);
     out.button = index % 3 === 0 ? 2 : index % 3 === 1 ? 1 : 0;
     out.spinePitch = -.025;
-    out.headYaw = mode === 'pretend' ? .08 : .13;
+    out.headYaw = mode === 'pretend' ? .32 : .36;
     if (mode === 'pretend') { out.frown = .18; out.smile = .06; out.headPitch = -.045; }
   } else if (mode === 'look') {
     out.headYaw = -.56; out.headPitch = .025;
@@ -41,7 +41,7 @@ function pose(mode, time) {
     out.chestRoll = -.025; out.frown = .88;
     out.rightZ = .42; out.rightY = .735; out.leftZ = .40; out.leftY = .76;
   } else if (mode === 'angry') {
-    out.headYaw = .08; out.headPitch = -.06; out.spinePitch = -.04;
+    out.headYaw = .30; out.headPitch = -.06; out.spinePitch = -.04;
     out.frown = .55; out.open = .18; out.rightZ = .37;
   } else if (mode === 'smile') {
     out.headYaw = .35; out.headPitch = .05; out.smile = .90; out.open = .20;
@@ -69,6 +69,7 @@ export function sampleMotion(mode, time) {
     result = pose(mode, time);
   }
   const blinkPhase = time % 4.1;
+  result.spinePitch += Math.sin(time * 1.15) * .0025;
   result.blink = blinkPhase > 3.6 && blinkPhase < 3.78 ? Math.sin((blinkPhase - 3.6) / .18 * Math.PI) ** 2 : 0;
   return result;
 }
