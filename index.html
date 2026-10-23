@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="スマホで確認できる架空パチスロCGキャラクターの3Dアニメーション試作">
+  <title>PachiAruCG | Motion Lab</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js"
+    }
+  }
+  </script>
+</head>
+<body>
+<main class="app">
+  <header class="header">
+    <div class="eyebrow">PachiAruCG / PROTOTYPE 01</div>
+    <h1>3Dキャラクター動作テスト</h1>
+    <p>髪なし・肌色・目と口だけのCG人間。スマホのブラウザで滑らかな動きを確認します。</p>
+  </header>
+  <div class="workspace">
+    <section class="preview-section" aria-label="縦動画プレビュー">
+      <div class="preview-top"><strong>縦動画プレビュー</strong><span>9:16</span></div>
+      <div class="stage" id="stage">
+        <div class="loading" id="loading">3Dを読み込み中…</div>
+        <div class="corner top"></div><div class="corner bottom"></div>
+      </div>
+      <p class="preview-note">説明用の文字や実在機種のロゴは映像に入れていません。左右の台は縦画面から一部見切れる構図です。</p>
+    </section>
+    <section class="panel" aria-label="キャラクター操作">
+      <div class="eyebrow">MOTION CONTROLLER</div>
+      <h2>動きを選ぶ</h2>
+      <div id="actions" class="controls" role="group" aria-label="個別の動作">
+        <button type="button" data-action="idle">無表情</button>
+        <button type="button" data-action="play">遊技する</button>
+        <button type="button" data-action="look">隣を見る</button>
+        <button type="button" data-action="shock">驚く</button>
+        <button type="button" data-action="sad">落胆する</button>
+        <button type="button" data-action="angry">怒る</button>
+        <button type="button" data-action="smile">喜ぶ</button>
+        <button type="button" data-action="pretend">平静を装う</button>
+      </div>
+      <div class="line"></div>
+      <div class="setting">
+        <label class="toggle-line" for="glasses"><span>メガネを装着</span><input type="checkbox" id="glasses" role="switch"></label>
+        <label for="speed">再生速度 <strong id="speed-value">1.0×</strong></label>
+        <input id="speed" type="range" min="0.5" max="1.5" step="0.1" value="1">
+      </div>
+      <div class="line"></div>
+      <div class="scenario">
+        <h2>一連の動作テスト</h2>
+        <p>普通に打つ → 隣で大当たり → 横目で見る → 落胆 → 何事もなかったように打ち直す</p>
+        <div class="transport">
+          <button class="primary" type="button" id="demo">▶ 一連の動作を再生</button>
+          <button class="secondary" type="button" id="pause">一時停止</button>
+        </div>
+        <p class="status" id="status" role="status" aria-live="polite">読込中</p>
+      </div>
+      <div class="line"></div>
+      <section class="spec">
+        <h2>今回の確認項目</h2>
+        <ul>
+          <li>顔は目と口だけ。髪・眉毛・鼻を付けない</li>
+          <li>メガネの着脱だけで別キャラにしない</li>
+          <li>首・肩・腕・まばたき・口を連続して動かす</li>
+          <li>隣の客は基本的に赤の他人・無関心</li>
+          <li>台は完全架空。通常は色付き長方形、当たりは7図柄</li>
+        </ul>
+      </section>
+    </section>
+  </div>
+  <footer>Prototype 01 — まずは人物の動きを固定し、次に店舗内設備・駐車場・店外背景へ展開します。</footer>
+</main>
+<script type="module" src="./app.js"></script>
+</body>
+</html>
