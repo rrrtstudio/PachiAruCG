@@ -46,6 +46,8 @@ export function staticGeometryBuilder(root) {
 // Its mapping stays continuous across all three visible symbol cells.
 export function curvedReelGeometry(width = .158, height = .39, bulge = .031, segments = 22) {
   const vertices = [], normals = [], uvs = [], indices = [];
+  const yRadius = height / (2 * Math.sin(.675));
+  const zRadius = bulge / (1 - Math.cos(.675));
   for (let row = 0; row <= segments; row++) {
     const v = row / segments;
     const angle = (v - .5) * 1.35;
@@ -53,7 +55,11 @@ export function curvedReelGeometry(width = .158, height = .39, bulge = .031, seg
     const z = (Math.cos(angle) - Math.cos(.675)) / (1 - Math.cos(.675)) * bulge;
     for (let col = 0; col < 2; col++) {
       vertices.push((col - .5) * width, y, z);
-      normals.push(0, Math.sin(angle), Math.cos(angle));
+      // The strip follows an ellipse, not a circle. Its outward normal is
+      // perpendicular to (dy/dθ, dz/dθ), with each axis' radius accounted for.
+      const ny = zRadius * Math.sin(angle), nz = yRadius * Math.cos(angle);
+      const normalLength = Math.hypot(ny, nz);
+      normals.push(0, ny / normalLength, nz / normalLength);
       uvs.push(col, v);
     }
     if (row < segments) {

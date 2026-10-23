@@ -5,6 +5,7 @@ import { loadCharacter } from './scene/character.js';
 import { createRoom } from './scene/room.js';
 import { getMachineStates } from './slot-timeline.js';
 import { sampleMotion, dampMotion } from './scene/motion.js';
+import { STOP_BUTTONS } from './scene/operation-layout.js';
 import { applyCameraView, DEFAULT_CAMERA_VIEW, CAMERA_VIEWS } from './camera-views.js';
 
 const stage = document.getElementById('stage');
@@ -35,16 +36,19 @@ const camera = new THREE.PerspectiveCamera(42, 9 / 16, .025, 30);
 const environment = new RoomEnvironment();
 const pmrem = new THREE.PMREMGenerator(renderer);
 scene.environment = pmrem.fromScene(environment, .04).texture;
-scene.environmentIntensity = .42;
+scene.environmentIntensity = .50;
 environment.dispose(); pmrem.dispose();
-scene.add(new THREE.HemisphereLight(0xf6f0e8, 0x5b5051, .78));
+scene.add(new THREE.HemisphereLight(0xf6f0e8, 0x5b5051, .60));
 const key = new THREE.DirectionalLight(0xfff3e6, 2.6);
-key.position.set(-2.5, 4.5, 2.7); key.castShadow = true;
+// One shared lighting setup for every shot: the upper-front key reveals the
+// cheek, sleeves and recessed cabinet faces; the quiet rim separates the seat.
+key.position.set(-2.1, 3.5, 2.2); key.castShadow = true;
 key.shadow.mapSize.set(1024, 1024); key.shadow.camera.left = -2.5; key.shadow.camera.right = 2.5;
 key.shadow.camera.top = 3; key.shadow.camera.bottom = -1.5;
-key.shadow.bias = -.0005; key.shadow.normalBias = .012; key.shadow.radius = 3;
+key.shadow.bias = -.0005; key.shadow.normalBias = .004; key.shadow.radius = 3;
 key.target.position.set(0, .8, .3); scene.add(key, key.target);
 const fill = new THREE.DirectionalLight(0xe6edfa, .48); fill.position.set(2.5, 2.2, -1); scene.add(fill);
+const rim = new THREE.DirectionalLight(0xffead4, .55); rim.position.set(1.4, 2.6, 1.8); scene.add(rim);
 const room = createRoom(scene);
 const cabinets = [-.82, 0, .82].map((x, seed) => {
   const cabinet = createCabinet({ seed, detail: seed === 1 });
@@ -95,7 +99,10 @@ try {
   window.__PACHI_REVIEW__ = {
     ready: true, phase: 'animated-rig', model: person.stats,
     get diagnostics() { return { camera: cameraView, triangles: renderer.info.render.triangles,
-      drawCalls: renderer.info.render.calls, model: person.stats, paused, mode, time, pose,
+      drawCalls: renderer.info.render.calls, model: person.stats, modelId: person.root.uuid,
+      paused, mode, time, pose,
+      contacts: person.getContactDiagnostics(),
+      cabinetIds: cabinets.map(cabinet => cabinet.root.uuid),
       cabinets: cabinets.map(cabinet => cabinet.root.userData) }; }
   };
 } catch (error) {
@@ -108,7 +115,9 @@ for (const button of actionButtons) button.addEventListener('click', () => setMo
 document.getElementById('demo').addEventListener('click', () => setMode('demo'));
 document.getElementById('study').addEventListener('click', () => {
   paused = true; mode = 'idle'; time = 0; pose = sampleMotion('idle', 0);
-  person.studyPose(); cabinets[1].buttons.forEach(button => { button.position.z = .192; });
+  person.studyPose(); cabinets[1].buttons.forEach(button => {
+    button.position.z = STOP_BUTTONS.frontZ - STOP_BUTTONS.depth / 2;
+  });
   dirty = true; renderer.shadowMap.needsUpdate = true; refreshStatus();
 });
 pauseButton.addEventListener('click', () => { paused = !paused; refreshStatus(); });
@@ -133,7 +142,8 @@ function render(timestamp = 0) {
     pose.blink = target.blink;
     person.applyPose(pose);
     cabinets[1].buttons.forEach((button, index) => {
-      button.position.z = .192 - (index === Math.round(pose.button) ? pose.press * .004 : 0);
+      button.position.z = STOP_BUTTONS.frontZ - STOP_BUTTONS.depth / 2 -
+        (index === Math.round(pose.button) ? pose.press * STOP_BUTTONS.travel : 0);
     });
     if (time - shadowTime > .12 || time < shadowTime) { renderer.shadowMap.needsUpdate = true; shadowTime = time; }
   }

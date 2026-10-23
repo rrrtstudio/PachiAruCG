@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test",
-    "check": "node --check app.js && node --check slot-state.js && node --check slot-timeline.js && node --check camera-views.js && node --check scene/character.js && node --check scene/cabinet.js && node --check scene/geometry.js && node --check scene/room.js && node --check scene/motion.js"
+    "check": "node --check app.js && node --check slot-state.js && node --check slot-timeline.js && node --check camera-views.js && node --check scene/character.js && node --check scene/cabinet.js && node --check scene/geometry.js && node --check scene/room.js && node --check scene/motion.js && node --check scene/operation-layout.js"
   },
   "engines": { "node": ">=22" }
 }

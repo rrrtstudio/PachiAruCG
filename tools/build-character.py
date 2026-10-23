@@ -157,11 +157,14 @@ for side,suffix in [(-1,'L'),(1,'R')]:
     shoulder=(side*.17,1.00,.695)
     arm_sections[suffix]=(shoulder,elbow,wrist)
     shirt_parts.append(loft('Sleeve sculpt '+suffix,[
-        ((side*.14,1.00,.705),.095,.095),
-        ((side*.195,.975,.66),.092,.088),
-        ((side*.232,.92,.565),.083,.077),
-        ((side*.253,.86,.455),.076,.073),
-        ((side*.255,.845,.435),.076,.073)
+        # The shoulder emerges from the torso as a low cloth crown, rather
+        # than a round ball. A gently changing sleeve section follows the arm.
+        ((side*.135,.985,.710),.079,.075),
+        ((side*.185,.962,.657),.081,.076),
+        ((side*.222,.923,.575),.078,.072),
+        ((side*.245,.883,.495),.071,.066),
+        ((side*.253,.859,.452),.066,.062),
+        ((side*.255,.845,.431),.064,.060)
     ],shirt))
 body=union('Shirt',shirt_parts,shirt,voxel=.006,iterations=5,decimate=.35)
 
@@ -169,28 +172,54 @@ arms=[]
 for side,suffix in [(-1,'L'),(1,'R')]:
     shoulder,elbow,wrist=arm_sections[suffix]
     x=wrist[0]
+    elbow_vector=Vector(elbow)
+    wrist_vector=Vector(wrist)
+    def arm_point(t):
+        return tuple(elbow_vector.lerp(wrist_vector,t))
     forearm=loft('Forearm '+suffix,[
-        ((side*.255,.86,.46),.063,.063),
-        ((side*.255,.83,.415),.066,.067),
-        ((side*.244,.815,.37),.063,.061),
-        ((x*.98,.815,wrist[2]+.035),.048,.043),
-        (wrist,.038,.036),
-        ((x,.807,wrist[2]-.025),.038,.034),
+        ((side*.255,.855,.457),.060,.055),
+        ((side*.255,.838,.432),.061,.055),
+        (elbow,.059,.053),
+        (arm_point(.24),.054,.049),
+        (arm_point(.53),.046,.042),
+        (arm_point(.78),.038,.035),
+        (wrist,.032,.029),
+        ((x,wrist[1]-.001,wrist[2]-.024),.033,.028),
     ],skin)
     hand_parts=[forearm,
-      ellipsoid('Palm '+suffix,(x,.808,wrist[2]-.046),(.052,.035,.067),skin),
-      ellipsoid('Thumb '+suffix,(x-side*.037,.814,wrist[2]-.065),(.028,.026,.039),skin)]
-    # Four short, soft fingers emerge from the same sculpted hand mesh.
-    for finger in range(4):
-        fx=x+(finger-1.5)*.021
-        finger_z=wrist[2]-.095+abs(finger-1.5)*.007
-        hand_parts.append(ellipsoid('Finger', (fx,.80,finger_z),(.014,.026,.029),skin,20,12))
-    arms.append(union('SkinArm_'+suffix,hand_parts,skin,voxel=.0038,iterations=3,decimate=.30))
+      ellipsoid('Palm '+suffix,(x,wrist[1]-.001,wrist[2]-.036),(.040,.024,.043),skin),
+      ellipsoid('Thenar '+suffix,(x-side*.026,wrist[1]-.001,wrist[2]-.038),(.023,.022,.028),skin)]
+    # Four distinct, mildly flexed fingers create an open operating hand.
+    # Their lower distal pads are nearly level, so the same mesh can touch a
+    # stop button or loosely rest on top of the lever without becoming a fist.
+    for lateral,length in [(-.024,.116),(-.002,.121),(.020,.114),(.040,.102)]:
+        dx=side*lateral
+        hand_parts.append(loft('Finger '+suffix,[
+          ((x+dx*.82,wrist[1]-.003,wrist[2]-.058),.013,.013),
+          ((x+dx,wrist[1]-.008,wrist[2]-.080),.0115,.012),
+          ((x+dx,wrist[1]-.019,wrist[2]-(length-.015)),.0105,.0105),
+          ((x+dx,wrist[1]-.019,wrist[2]-length),.009,.010),
+        ],skin,24))
+    hand_parts.append(loft('Open thumb '+suffix,[
+      ((x-side*.026,wrist[1]-.001,wrist[2]-.025),.018,.017),
+      ((x-side*.042,wrist[1]-.004,wrist[2]-.046),.016,.015),
+      ((x-side*.051,wrist[1]-.009,wrist[2]-.066),.013,.012),
+      ((x-side*.050,wrist[1]-.013,wrist[2]-.084),.010,.010),
+    ],skin,24))
+    skin_arm=union('SkinArm_'+suffix,hand_parts,skin,voxel=.0032,iterations=3,decimate=.30)
+    # Offsets are metres in the Y-up world rest pose, relative to Hand_L/R.
+    # Runtime converts them through the hand's inverse rest world quaternion.
+    skin_arm['buttonContactOffset']=[side*-.024,-.029,-.108]
+    skin_arm['contactSpace']='Y-up world rest offset from Hand_'+suffix
+    if suffix=='L':
+        # Virtual ball centre below the open fingers, not a point inside skin.
+        skin_arm['leverGripOffset']=[-.015,-.053,-.100]
+    arms.append(skin_arm)
     # The rolled hem gives the sleeve believable cloth thickness at the skin.
     cuff=loft('RolledCuff_'+suffix,[
-      ((side*.252,.867,.469),.078,.076),
-      ((side*.255,.85,.44),.079,.077),
-      ((side*.255,.839,.425),.074,.073)
+      ((side*.251,.868,.468),.066,.061),
+      ((side*.254,.855,.447),.068,.063),
+      ((side*.255,.845,.431),.064,.059)
     ],shirt)
     arms.append(cuff)
 
@@ -401,6 +430,10 @@ rig['design']='Original PachiAruCG adult; bald; eyes and mouth only; seated rest
 rig['worldForward']='-Z'
 rig['units']='metres'
 rig['restPose']='seated; no baked animation; bones and facial morph targets animate continuously'
+rig['buttonContactOffset_L']=[.024,-.029,-.108]
+rig['buttonContactOffset_R']=[-.024,-.029,-.108]
+rig['leverGripOffset_L']=[-.015,-.053,-.100]
+rig['contactSpace']='Y-up world rest offsets in metres from corresponding Hand bone origin'
 ROOT.joinpath('assets').mkdir(exist_ok=True)
 bpy.ops.object.select_all(action='SELECT')
 bpy.ops.export_scene.gltf(filepath=str(ROOT/'assets/character.glb'),export_format='GLB',

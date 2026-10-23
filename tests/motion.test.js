@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { sampleMotion, dampMotion } from '../scene/motion.js';
+import { HAND_CONTACT_OFFSETS } from '../scene/operation-layout.js';
 
 const modes = ['idle', 'play', 'look', 'shock', 'sad', 'angry', 'smile', 'pretend', 'demo'];
 const expressive = ['smile', 'open', 'frown', 'blink', 'press'];
@@ -24,12 +25,15 @@ test('every motion produces finite restrained joint, wrist and expression target
   }
 });
 
-test('study pose holds a neutral expression and planted operating wrist targets', () => {
+test('study pose holds a neutral expression with finger and grip landmarks on the controls', () => {
   const pose = sampleMotion('idle', 0);
   for (const key of expressive) assert.equal(pose[key], 0);
   assert.equal(pose.headYaw, .55);
-  assert.deepEqual([pose.rightX, pose.rightY, pose.rightZ], [.16, .81, .31]);
-  assert.deepEqual([pose.leftX, pose.leftY, pose.leftZ], [-.26, .81, .34]);
+  const pad = [pose.rightX, pose.rightY, pose.rightZ].map((value, axis) => value + HAND_CONTACT_OFFSETS.R.button[axis]);
+  const grip = [pose.leftX, pose.leftY, pose.leftZ].map((value, axis) => value + HAND_CONTACT_OFFSETS.L.lever[axis]);
+  for (const [actual, expected] of [[pad, [.16, .794, .199]], [grip, [-.278, .788, .227]]]) {
+    actual.forEach((value, axis) => assert.ok(Math.abs(value - expected[axis]) < 1e-10));
+  }
 });
 
 test('button play visits all three stops with a shallow press rather than arm replacement', () => {

@@ -1,0 +1,60 @@
+{
+  "study": "study-01",
+  "sourceCommit": "4ece95a144418fcbe37bd7f6d150ce88e340875c",
+  "sourceRepository": "rrrtstudio/PachiAruCG",
+  "archivedAtUTC": "2026-10-23T21:34:27.350404+00:00",
+  "method": "Copied the existing committed browser screenshots and verification report before later visual changes; these are not new captures.",
+  "browserExecutedForArchive": false,
+  "scope": "Six static camera captures and the original complete verification report. Other image paths referenced by that original report are not part of this archive.",
+  "files": [
+    {
+      "source": "review/images/360-player.png",
+      "archive": "images/360-player.png",
+      "sha256": "584439a195adcfc51ad2de25b40c322abaa5d968e71fb7cdef91069808770462",
+      "bytes": 422491,
+      "matchesSourceCommit": true
+    },
+    {
+      "source": "review/images/360-behind.png",
+      "archive": "images/360-behind.png",
+      "sha256": "822ff0b9f9826822d5a3bd4b587d8c670a96a5b62e1653d9faa09b2acf75a050",
+      "bytes": 453736,
+      "matchesSourceCommit": true
+    },
+    {
+      "source": "review/images/360-side.png",
+      "archive": "images/360-side.png",
+      "sha256": "9271136c34cde99fe1bc3bb4ac8143c78d519ee048f8b8ab45c347b80efb5e2b",
+      "bytes": 489089,
+      "matchesSourceCommit": true
+    },
+    {
+      "source": "review/images/390-player.png",
+      "archive": "images/390-player.png",
+      "sha256": "decabf0d1cdf39a6779219e545997be552aa5e17da66eb0dd5514e7c3d91b6f2",
+      "bytes": 458662,
+      "matchesSourceCommit": true
+    },
+    {
+      "source": "review/images/390-behind.png",
+      "archive": "images/390-behind.png",
+      "sha256": "dac86ee13aeb3cfc9ec131330d0405860006978da711e5240761f7a23d0328ef",
+      "bytes": 486501,
+      "matchesSourceCommit": true
+    },
+    {
+      "source": "review/images/390-side.png",
+      "archive": "images/390-side.png",
+      "sha256": "169a1f5e5022485db738307d280fb6fda5b3c8241540a4355c25750766ac1e44",
+      "bytes": 513672,
+      "matchesSourceCommit": true
+    },
+    {
+      "source": "review/verification.json",
+      "archive": "verification.json",
+      "sha256": "236910dbb9641791f134f4d0be43b6450c317969b312c6efd4e3d3a5e9af3b83",
+      "bytes": 18781,
+      "matchesSourceCommit": true
+    }
+  ]
+}

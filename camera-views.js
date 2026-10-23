@@ -21,9 +21,9 @@ export const CAMERA_VIEWS = Object.freeze({
     label: 'C：斜め前からの3/4',
     // Ahead of the player, on the cabinet's open side. The study pose includes
     // a gentle head turn toward this side, shared by all three camera views.
-    position: Object.freeze([-2.90, 1.62, 0.58]),
-    target: Object.freeze([0, 0.92, 0.44]),
-    fov: 43,
+    position: Object.freeze([-2.60, 1.55, 0.70]),
+    target: Object.freeze([0, 0.94, 0.42]),
+    fov: 49,
   }),
 });
 
