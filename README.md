@@ -14,13 +14,16 @@
 - 9:16 のスマホ表示、架空の3リール機が同じ島に並ぶ背景
 - 画像の切替ではなく、Three.jsで動作する3Dオブジェクト
 
-### プレビュー公開（最初の1回）
-GitHub のこのリポジトリを開く → **Settings** → **Pages** → **Build and deployment** → **Deploy from a branch** → `main` / `/(root)` → **Save**。
-公開後は次のURLでアクセスできる構成です：
+### GitHub運用とプレビュー公開
+同じリポジトリの `codex/` ブランチから `main` へ出す非ドラフトPRは、最新の必須チェック `test` に成功し、GitHubの保護条件を満たした場合に自動マージします。失敗・競合・保護条件待ちはマージせずPRコメントとActionsの実行結果に報告します。人物・筐体などの制作変更も、今後はこのPR経由で反映できます。
+
+初回はこの運用を追加するPRを通常の保護ルールに従ってマージし、**Settings → Pages → Build and deployment → Source → GitHub Actions** を確認してください。以後はマージ後にmainを再テストしてPagesへ公開します。設定の確認方法、権限、公開失敗時の再実行は [GitHub運用の説明](docs/GITHUB_AUTOMATION.md) を参照してください。
+
+公開先：
 
 https://rrrtstudio.github.io/PachiAruCG/
 
-GitHub Pagesの有効化操作と公開状態は、リポジトリ管理者が確認してください。公開後はスマホからも閲覧・操作できます。
+公開後はスマホから閲覧・操作できます。Pagesの設定が未完了の場合は公開ジョブが失敗し、mainのテスト結果とは別にActionsで確認できます。
 
 ### Codexの作業ルール
 `AGENTS.md` を読み、キャラクター・機種・店舗の設定を守ってください。全作品で人物・背景・遊技状態の一貫性を維持します。

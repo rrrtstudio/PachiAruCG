@@ -1,0 +1,54 @@
+name: Merge tested Codex PRs
+
+on:
+  workflow_run:
+    workflows: [Reel and camera checks]
+    types: [completed]
+
+permissions: {}
+
+concurrency:
+  group: codex-merge-${{ github.event.workflow_run.head_branch }}
+  cancel-in-progress: false
+
+jobs:
+  merge:
+    if: >-
+      github.repository == 'rrrtstudio/PachiAruCG' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.head_repository.id == github.event.repository.id &&
+      startsWith(github.event.workflow_run.head_branch, 'codex/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: read
+    outputs:
+      merged: ${{ steps.merge.outputs.merged }}
+      sha: ${{ steps.merge.outputs.sha }}
+    steps:
+      # workflow_run executes the version on main. Never check out the PR,
+      # consume its artifacts, restore its caches, or execute its scripts here.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.workflow_sha }}
+          persist-credentials: false
+      - name: Validate current test result and merge without bypass
+        id: merge
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            const { runAutoMerge } = require('./.github/scripts/auto-merge.cjs');
+            await runAutoMerge({ github, context, core });
+
+  pages:
+    needs: merge
+    if: needs.merge.outputs.merged == 'true'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy-pages.yml
+    with:
+      sha: ${{ needs.merge.outputs.sha }}
