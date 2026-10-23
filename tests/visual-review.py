@@ -14,6 +14,7 @@ verification. The generated gallery contains browser captures, not scene assets.
 import argparse
 import hashlib
 import json
+import math
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from io import BytesIO
@@ -81,10 +82,37 @@ def open_review(browser, base_url, width, height, motion, pixel_ratio=2):
     return context, page, errors, failures, warnings
 
 
+def static_rig_state(diagnostics):
+    """Validate the actual study rig, independently of camera visibility."""
+    model_id = diagnostics.get("modelId")
+    assert isinstance(model_id, str) and model_id, "The review diagnostics must identify the live 3D model"
+    cabinet_ids = diagnostics["cabinetIds"]
+    assert len(cabinet_ids) == 3 and all(isinstance(value, str) and value for value in cabinet_ids), cabinet_ids
+    assert len(set(cabinet_ids)) == 3, "The three cabinets must have distinct live model identities"
+    cabinets = diagnostics["cabinets"]
+    assert len(cabinets) == 3, cabinets
+    assert diagnostics["paused"] is True, "The static comparison rig is not paused"
+    contacts = diagnostics["contacts"]
+    assert contacts["space"] == "metres/world", contacts
+    for name in ("rightButtonPad", "leftButtonPad", "leftLeverGrip"):
+        point = contacts[name]
+        assert len(point) == 3 and all(math.isfinite(value) for value in point), (name, point)
+    gaps = contacts["studySurfaceGaps"]
+    for name in ("rightStop", "leftLever"):
+        assert math.isfinite(gaps[name]) and 0 <= gaps[name] < .001, (name, gaps[name])
+    for side in ("R", "L"):
+        arm = contacts["arms"][side]
+        assert math.isfinite(arm["wristError"]) and 0 <= arm["wristError"] < .001, (side, arm)
+        assert arm["clamped"] is False, (side, arm)
+    return {"modelId": model_id, "cabinetIds": cabinet_ids, "cabinets": cabinets,
+            "pose": diagnostics["pose"], "contacts": contacts}
+
+
 def capture_static(browser, base_url, width, height, output, pixel_ratio=2, selected_views=None, interface=False):
     context, page, errors, failures, warnings = open_review(browser, base_url, width, height, False, pixel_ratio)
     canvas = page.locator("#stage canvas")
     captures = []
+    reference_rig = None
     for view in selected_views or VIEWS:
         label = VIEWS[view]
         print(f"Capturing {width}-{view}", flush=True)
@@ -100,8 +128,21 @@ def capture_static(browser, base_url, width, height, output, pixel_ratio=2, sele
         frame = canvas.screenshot(path=str(output / "images" / filename))
         page.wait_for_timeout(200)
         assert digest(canvas.screenshot()) == digest(frame), "The static review pose changed while paused"
+        rig = static_rig_state(page.evaluate("window.__PACHI_REVIEW__.diagnostics"))
+        if reference_rig is None:
+            reference_rig = rig
+        else:
+            assert rig["modelId"] == reference_rig["modelId"], "Switching cameras replaced the 3D model"
+            assert rig["cabinetIds"] == reference_rig["cabinetIds"], "Switching cameras replaced or reordered the cabinets"
+            assert rig["cabinets"] == reference_rig["cabinets"], "Switching cameras changed the cabinet states"
+            assert rig["pose"] == reference_rig["pose"], "Switching cameras changed the static pose"
+            assert rig["contacts"] == reference_rig["contacts"], "Switching cameras moved the actual rig contacts"
         captures.append({"view": view, "label": label, "file": f"images/{filename}",
-                         "sha256": digest(frame), **frame_stats(frame), "layout": dimensions})
+                         "sha256": digest(frame), **frame_stats(frame), "layout": dimensions,
+                         **rig, "contactChecks": {"status": "passed", "toleranceMetres": .001,
+                             "maxStudySurfaceGapMetres": max(rig["contacts"]["studySurfaceGaps"].values()),
+                             "maxWristErrorMetres": max(rig["contacts"]["arms"][side]["wristError"] for side in ("R", "L")),
+                             "clamped": False}})
     assert len({item["sha256"] for item in captures}) == len(captures), "The cameras show identical frames"
     if interface:
         page.screenshot(path=str(output / "images" / f"{width}-interface.png"), full_page=True)
@@ -113,6 +154,10 @@ def capture_static(browser, base_url, width, height, output, pixel_ratio=2, sele
     assert not failures, failures
     context.close()
     return {"viewport": [width, height], "pixelRatio": pixel_ratio, "captures": captures,
+            "cameraRigInvariants": {"status": "passed", "modelId": reference_rig["modelId"],
+                "cabinetIds": reference_rig["cabinetIds"],
+                "camerasCompared": [capture["view"] for capture in captures],
+                "comparison": "Identical modelId, cabinetIds, cabinet states, pose and complete world-space contact diagnostics within this browser context"},
             "diagnostics": diagnostics, "warnings": warnings, "errors": errors, "failedRequests": failures}
 
 
@@ -175,6 +220,16 @@ def verify_motion(browser, base_url, output, pixel_ratio=2):
 
 
 def write_gallery(output, results):
+    comparison = ""
+    if (output / "iterations/study-01/source.json").exists():
+        figures = "".join(
+            f'<figure><a href="images/{width}-c-study-comparison.jpg">'
+            f'<img src="images/{width}-c-study-comparison.jpg" alt="C視点の前回・今回比較：画面幅{width}px" loading="lazy"></a>'
+            f'<figcaption><a href="images/{width}-c-study-comparison.jpg">{width}px：タップして原寸画像を開く</a></figcaption></figure>'
+            for width in (390, 360))
+        comparison = '<section><h2>C視点：前回と今回</h2><p>前回から造形に加え、カメラと照明も調整しています。' \
+                     '今回のA・B・C視点では、同じ3D人物と同じ静止ポーズを使用しています。</p>' \
+                     f'<div class="comparisons">{figures}</div></section>'
     groups = []
     for result in results:
         width, height = result["viewport"]
@@ -187,11 +242,12 @@ def write_gallery(output, results):
 <style>*{box-sizing:border-box}body{margin:0;background:#14191e;color:#f4eee3;font:16px/1.7 system-ui,sans-serif}
 main{max-width:1180px;margin:auto;padding:24px 18px}h1{font-size:clamp(22px,4vw,34px)}h2{font-size:18px}
 p{color:#c3c7c7}a{color:#e6b88c}.shots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.comparisons{display:grid;gap:24px}
 figure{margin:0}img{display:block;width:100%;height:auto;border-radius:10px;background:#242b31}figcaption{padding:9px 0}
 section{margin:32px 0 40px}@media(max-width:600px){.shots{grid-template-columns:1fr;gap:22px}figure{max-width:390px;margin:auto;width:100%}}</style>
 <main><h1>3視点の実レンダリング比較</h1><p>同じ3D人物・筐体・ポーズをブラウザで描画して撮影した画像です。
 このページの画像を3Dプレビューの代わりには使用していません。</p><p><a href="../?review=1&amp;motion=off">動かせる3Dプレビューを開く</a></p>'''
-    (output / "index.html").write_text(html + "".join(groups) + "</main></html>", encoding="utf-8")
+    (output / "index.html").write_text(html + comparison + "".join(groups) + "</main></html>", encoding="utf-8")
 
 
 def main():

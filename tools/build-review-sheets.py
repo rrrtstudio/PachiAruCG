@@ -7,11 +7,14 @@ import argparse
 from PIL import Image, ImageDraw, ImageFont
 
 
-def sheet(paths, labels, target, title, font_path, width=336):
+def sheet(paths, labels, target, title, font_path, width=336, crop=None):
     margin, gap, top = 24, 18, 94 if title else 68
     photos = []
     for path in paths:
         with Image.open(path) as source:
+            if crop:
+                source = source.crop(tuple(round(value * dimension) for value, dimension in
+                    zip(crop, (source.width, source.height, source.width, source.height), strict=True)))
             height = round(source.height * width / source.width)
             photos.append(source.convert("RGB").resize((width, height), Image.Resampling.LANCZOS))
     canvas = Image.new("RGB", (margin * 2 + width * len(photos) + gap * (len(photos) - 1),
@@ -40,6 +43,15 @@ def main():
               f"PachiAruCG / {width} × {height}", args.font)
     sheet([root / "before/390-side.png", images / "390-side.png"],
           ["改善前", "改善後（構図も更新）"], images / "before-after-side.jpg", "", args.font, width=365)
+    previous = root / "iterations/study-01/images"
+    if previous.exists():
+        for width, height in ((360, 800), (390, 844)):
+            sheet([previous / f"{width}-side.png", images / f"{width}-side.png"],
+                  ["前回（4ece95a）", "今回（Cを調整）"], images / f"{width}-c-study-comparison.jpg",
+                  f"{width} × {height} / C：顔と手元", args.font, width=400)
+        sheet([previous / "390-side.png", images / "390-side.png"],
+              ["前回", "今回"], images / "c-hands-comparison.jpg",
+              "同じC画像の手元を拡大", args.font, width=500, crop=(.10, .40, .90, .67))
 
 
 if __name__ == "__main__":

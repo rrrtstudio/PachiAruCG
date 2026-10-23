@@ -21,7 +21,7 @@
       334,
       595
     ],
-    "sampledColors": 9586
+    "sampledColors": 10666
   },
   "responses": [
     {
@@ -37,7 +37,7 @@
       "status": 200
     },
     {
-      "path": "/PachiAruCG/vendor/three/addons/environments/RoomEnvironment.js",
+      "path": "/PachiAruCG/slot-timeline.js",
       "status": 200
     },
     {
@@ -45,11 +45,11 @@
       "status": 200
     },
     {
-      "path": "/PachiAruCG/slot-timeline.js",
+      "path": "/PachiAruCG/scene/room.js",
       "status": 200
     },
     {
-      "path": "/PachiAruCG/scene/room.js",
+      "path": "/PachiAruCG/vendor/three/addons/environments/RoomEnvironment.js",
       "status": 200
     },
     {
@@ -57,11 +57,15 @@
       "status": 200
     },
     {
-      "path": "/PachiAruCG/scene/motion.js",
+      "path": "/PachiAruCG/camera-views.js",
       "status": 200
     },
     {
-      "path": "/PachiAruCG/camera-views.js",
+      "path": "/PachiAruCG/scene/operation-layout.js",
+      "status": 200
+    },
+    {
+      "path": "/PachiAruCG/scene/motion.js",
       "status": 200
     },
     {
@@ -69,7 +73,7 @@
       "status": 200
     },
     {
-      "path": "/PachiAruCG/vendor/three/addons/geometries/RoundedBoxGeometry.js",
+      "path": "/PachiAruCG/scene/geometry.js",
       "status": 200
     },
     {
@@ -77,11 +81,11 @@
       "status": 200
     },
     {
-      "path": "/PachiAruCG/scene/geometry.js",
+      "path": "/PachiAruCG/vendor/three/addons/utils/BufferGeometryUtils.js",
       "status": 200
     },
     {
-      "path": "/PachiAruCG/vendor/three/addons/utils/BufferGeometryUtils.js",
+      "path": "/PachiAruCG/vendor/three/addons/geometries/RoundedBoxGeometry.js",
       "status": 200
     },
     {
@@ -95,11 +99,12 @@
   ],
   "errors": [],
   "failedRequests": [],
+  "operationLayoutModule": "loaded from /PachiAruCG/scene/operation-layout.js",
   "model": {
     "source": "Blender / skinned GLB",
     "bones": 17,
     "skinnedMeshes": 28,
-    "triangles": 108352,
+    "triangles": 107966,
     "animationClips": 0
   },
   "tls": "normal verification; no certificate or trust overrides"
