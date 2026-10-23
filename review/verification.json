@@ -1,0 +1,328 @@
+{
+  "phase": "static",
+  "source": "real Chromium WebGL rendering",
+  "tls": "normal verification; no certificate or trust override",
+  "static": [
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "pixelRatio": 2,
+      "captures": [
+        {
+          "view": "player",
+          "label": "A：打ち手操作視点",
+          "file": "images/360-player.png",
+          "sha256": "2ef7cf7c9cb46c7465084cedefc244c4bacf801f1ce8b199b8d17afa8bcc6467",
+          "pixels": [
+            652,
+            1164
+          ],
+          "sampledColors": 10551,
+          "layout": {
+            "stageWidth": 328,
+            "stageHeight": 583.109375,
+            "pageWidth": 360,
+            "viewport": 360,
+            "canvasWidth": 652,
+            "canvasHeight": 1162
+          }
+        },
+        {
+          "view": "behind",
+          "label": "B：背後からの肩越し",
+          "file": "images/360-behind.png",
+          "sha256": "fea8c9cd59c2021b1d635b81c65a6c4804706572e1d0b0bf69da7ffe4acd4c1f",
+          "pixels": [
+            652,
+            1164
+          ],
+          "sampledColors": 10643,
+          "layout": {
+            "stageWidth": 328,
+            "stageHeight": 583.109375,
+            "pageWidth": 360,
+            "viewport": 360,
+            "canvasWidth": 652,
+            "canvasHeight": 1162
+          }
+        },
+        {
+          "view": "side",
+          "label": "C：斜め前方の3/4視点",
+          "file": "images/360-side.png",
+          "sha256": "70986ad799d2a695f4983389db4eb3de4b9feac70f1d306c290edbf0f59fadc1",
+          "pixels": [
+            652,
+            1164
+          ],
+          "sampledColors": 10012,
+          "layout": {
+            "stageWidth": 328,
+            "stageHeight": 583.109375,
+            "pageWidth": 360,
+            "viewport": 360,
+            "canvasWidth": 652,
+            "canvasHeight": 1162
+          }
+        }
+      ],
+      "diagnostics": {
+        "ready": true,
+        "phase": "static",
+        "model": {
+          "source": "Blender / skinned GLB",
+          "bones": 17,
+          "skinnedMeshes": 28,
+          "triangles": 106508,
+          "animationClips": 0
+        },
+        "diagnostics": {
+          "camera": "side",
+          "triangles": 259164,
+          "drawCalls": 119,
+          "model": {
+            "source": "Blender / skinned GLB",
+            "bones": 17,
+            "skinnedMeshes": 28,
+            "triangles": 106508,
+            "animationClips": 0
+          },
+          "paused": true,
+          "mode": "idle",
+          "time": 0,
+          "cabinets": [
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "blue",
+                  "green",
+                  "orange"
+                ],
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "purple",
+                  "rose",
+                  "blue"
+                ],
+                [
+                  "green",
+                  "orange",
+                  "yellow"
+                ],
+                [
+                  "lavender",
+                  "purple",
+                  "rose"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ],
+                [
+                  "orange",
+                  "yellow",
+                  "lavender"
+                ]
+              ],
+              "noticeLampOn": false
+            }
+          ]
+        }
+      },
+      "warnings": [],
+      "errors": [],
+      "failedRequests": []
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "pixelRatio": 2,
+      "captures": [
+        {
+          "view": "player",
+          "label": "A：打ち手操作視点",
+          "file": "images/390-player.png",
+          "sha256": "3839e72c850b00b154ee2617ffeba87f95269ca91315cadb564b746510b043bf",
+          "pixels": [
+            668,
+            1190
+          ],
+          "sampledColors": 10827,
+          "layout": {
+            "stageWidth": 335,
+            "stageHeight": 595.546875,
+            "pageWidth": 390,
+            "viewport": 390,
+            "canvasWidth": 666,
+            "canvasHeight": 1188
+          }
+        },
+        {
+          "view": "behind",
+          "label": "B：背後からの肩越し",
+          "file": "images/390-behind.png",
+          "sha256": "d08feef133213c77cf6d913d0d3b6e40f126b3b50103f4f8c94a736485f9889b",
+          "pixels": [
+            668,
+            1190
+          ],
+          "sampledColors": 10948,
+          "layout": {
+            "stageWidth": 335,
+            "stageHeight": 595.546875,
+            "pageWidth": 390,
+            "viewport": 390,
+            "canvasWidth": 666,
+            "canvasHeight": 1188
+          }
+        },
+        {
+          "view": "side",
+          "label": "C：斜め前方の3/4視点",
+          "file": "images/390-side.png",
+          "sha256": "9779cf106ff241aa9c99426cf053abb01a4871e43740739d54a5956b4ff6ea43",
+          "pixels": [
+            668,
+            1190
+          ],
+          "sampledColors": 10236,
+          "layout": {
+            "stageWidth": 335,
+            "stageHeight": 595.546875,
+            "pageWidth": 390,
+            "viewport": 390,
+            "canvasWidth": 666,
+            "canvasHeight": 1188
+          }
+        }
+      ],
+      "diagnostics": {
+        "ready": true,
+        "phase": "static",
+        "model": {
+          "source": "Blender / skinned GLB",
+          "bones": 17,
+          "skinnedMeshes": 28,
+          "triangles": 106508,
+          "animationClips": 0
+        },
+        "diagnostics": {
+          "camera": "side",
+          "triangles": 259164,
+          "drawCalls": 119,
+          "model": {
+            "source": "Blender / skinned GLB",
+            "bones": 17,
+            "skinnedMeshes": 28,
+            "triangles": 106508,
+            "animationClips": 0
+          },
+          "paused": true,
+          "mode": "idle",
+          "time": 0,
+          "cabinets": [
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "blue",
+                  "green",
+                  "orange"
+                ],
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "purple",
+                  "rose",
+                  "blue"
+                ],
+                [
+                  "green",
+                  "orange",
+                  "yellow"
+                ],
+                [
+                  "lavender",
+                  "purple",
+                  "rose"
+                ]
+              ],
+              "noticeLampOn": false
+            },
+            {
+              "phase": "normal",
+              "reels": [
+                [
+                  "yellow",
+                  "lavender",
+                  "purple"
+                ],
+                [
+                  "rose",
+                  "blue",
+                  "green"
+                ],
+                [
+                  "orange",
+                  "yellow",
+                  "lavender"
+                ]
+              ],
+              "noticeLampOn": false
+            }
+          ]
+        }
+      },
+      "warnings": [],
+      "errors": [],
+      "failedRequests": []
+    }
+  ],
+  "motion": null
+}

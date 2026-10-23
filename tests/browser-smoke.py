@@ -2,8 +2,8 @@
 """Real Chromium/WebGL smoke test; requires Python Playwright and Chromium.
 
 Run: python tests/browser-smoke.py
-Screenshots go to /tmp/pachiarucg-browser by default. Uses the production CDN
-import map and normal certificate validation; no TLS/trust overrides or fixtures.
+Screenshots go to /tmp/pachiarucg-browser by default. Uses the production import
+map and bundled Three.js modules; no TLS/trust overrides or request fixtures.
 """
 
 import argparse
@@ -155,7 +155,7 @@ if __name__ == "__main__":
                        for w, h in ((360, 800), (390, 844), (1280, 900))]
             browser.close()
             print(json.dumps({"tests": results, "screenshots": str(args.output_dir),
-                              "tls": "normal verification; production CDN import"},
+                              "tls": "normal verification; bundled production modules"},
                              ensure_ascii=False, indent=2))
     finally:
         server.shutdown()
